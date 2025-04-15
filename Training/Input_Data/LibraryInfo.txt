@@ -1,0 +1,10 @@
+10001|Shadow Hunters|Liam Wong|2021|manga|action|Completed|-
+10002|Moonlight Kiss|Yuna Kim|2022|manhwa|romance|InProgress|-
+10003|Cyber Dreams|Alex Chen|2020|webtoon|sci-fi|Hiatus|-
+10004|Dragon Scroll|Takeshi Ito|2019|manga|fantasy|Completed|-
+10005|Love Algorithm|Emily Ray|2024|manhwa|comedy|InProgress|-
+10006|Neon Prophecy|Ivan Petrov|2023|webtoon|thriller|Ongoing|-
+10007|Eclipse City|Sara Lee|2025|manhwa|drama|InProgress|-
+10008|Zero Signal|Mark Vega|2021|manga|mystery|Completed|-
+10009|Winds of Yore|Naoko Sato|2022|manga|historical|Hiatus|-
+10010|Pixel Heart|Chris Tan|2023|webtoon|slice of life|InProgress|-
