@@ -44,6 +44,7 @@
             helpToolStripMenuItem = new ToolStripMenuItem();
             aboutToolStripMenuItem = new ToolStripMenuItem();
             comboBoxSearchBy = new ComboBox();
+            buttonDeleteComics = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             menuStrip1.SuspendLayout();
@@ -52,6 +53,7 @@
             // panel1
             // 
             panel1.BackColor = SystemColors.ActiveCaption;
+            panel1.Controls.Add(buttonDeleteComics);
             panel1.Controls.Add(buttonAddComic);
             panel1.Dock = DockStyle.Left;
             panel1.Location = new Point(0, 28);
@@ -187,6 +189,16 @@
             comboBoxSearchBy.Size = new Size(151, 28);
             comboBoxSearchBy.TabIndex = 12;
             // 
+            // buttonDeleteComics
+            // 
+            buttonDeleteComics.Location = new Point(16, 95);
+            buttonDeleteComics.Name = "buttonDeleteComics";
+            buttonDeleteComics.Size = new Size(177, 31);
+            buttonDeleteComics.TabIndex = 1;
+            buttonDeleteComics.Text = "Delete Selected Comic";
+            buttonDeleteComics.UseVisualStyleBackColor = true;
+            buttonDeleteComics.Click += buttonDeleteComics_Click;
+            // 
             // FormMainMenu
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -227,5 +239,6 @@
         private ToolStripMenuItem aboutToolStripMenuItem;
         private ComboBox comboBoxSearchBy;
         private Button buttonAddComic;
+        private Button buttonDeleteComics;
     }
 }

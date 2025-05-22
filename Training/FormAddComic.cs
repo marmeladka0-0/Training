@@ -45,7 +45,7 @@ namespace MultiCOloredModernUI
             }
 
             Comic comic = new Comic();
-            
+
             comic.title = textBoxTitle.Text;
             comic.author = textBoxAuthor.Text;
             comic.releaseYear = Convert.ToInt32(numericUpDownYear.Value);
@@ -56,5 +56,6 @@ namespace MultiCOloredModernUI
             NewComic = comic;
             this.Close();
         }
+
     }
 }

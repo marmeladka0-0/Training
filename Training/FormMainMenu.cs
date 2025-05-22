@@ -186,7 +186,8 @@ namespace Training
             form.ShowDialog();
 
             if (form.NewComic == null) { return; }
-            if (library.comics.Count == 0) { form.NewComic.comicID = 10000; } else
+            if (library.comics.Count == 0) { form.NewComic.comicID = 10000; }
+            else
             {
                 form.NewComic.comicID = library.comics.Last().comicID + 1;
             }
@@ -194,6 +195,30 @@ namespace Training
             dataGridView1.DataSource = null;
             dataGridView1.DataSource = library.comics;
             dataGridView1.Columns["comicId"].Visible = false;
+        }
+
+        private void buttonDeleteComics_Click(object sender, EventArgs e)
+        {
+            var result = MessageBox.Show(
+               "Are you sure you want to delete this comic?",
+               "Confirmation",
+               MessageBoxButtons.YesNo,
+               MessageBoxIcon.Question
+             );
+
+            if (result == DialogResult.Yes)
+            {
+                DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
+
+                Comic selectedComic = (Comic)selectedRow.DataBoundItem;
+
+                library.comics.Remove(selectedComic);
+
+                dataGridView1.DataSource = null;
+                dataGridView1.DataSource = library.comics;
+                dataGridView1.Columns["comicID"].Visible = false;
+            }
+            
         }
     }
 }
