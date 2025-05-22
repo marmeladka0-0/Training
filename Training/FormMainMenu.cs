@@ -13,9 +13,9 @@ namespace Training
         public FormMainMenu()
         {
             // робить кнопку невидимою
-            
+
             InitializeComponent();
-            button1.Visible = false;    
+            button1.Visible = false;
             button1.Enabled = false;
             button2.Visible = false;
             button2.Enabled = false;
@@ -30,6 +30,8 @@ namespace Training
             textBox2.Enabled = false;
             library.WriteInfo();
             library.ReadInfo();
+
+            comboBoxSearchBy.SelectedIndex = 0;
 
             dataGridView1.DataSource = library.comics;
             dataGridView1.Columns["comicId"].Visible = false;
@@ -64,19 +66,108 @@ namespace Training
         private void btnSearch_Click(object sender, EventArgs e)
         {
             string s = textBox3.Text;
+            string selectedField = comboBoxSearchBy.SelectedItem.ToString().ToLower();
+            //MessageBox.Show($"selectedField = {selectedField}");
             //label3.Text = "*А тут будуть списком комікси*";
-            List<Comic> selectedComics = [];
-            foreach (Comic comic in library.comics) 
+
+            //List<Comic> selectedComics = [];
+            //foreach (Comic comic in library.comics)
+            //{
+            //    if (comic.HasInTitle(s))
+            //    {
+            //        selectedComics.Add(comic);
+            //    }
+            //}
+            if (library.isComicSelected)
             {
-                if (comic.HasInTitle(s))
-                {
-                    selectedComics.Add(comic);
-                }
+                dataGridView1.DataSource = library.SearchComics(s, selectedField);
+                dataGridView1.Columns["comicId"].Visible = false;
             }
-            dataGridView1.DataSource = selectedComics;
-            dataGridView1.Columns["comicId"].Visible = false;
+            else
+            {
+                dataGridView1.DataSource = library.SearchCharacters(s, selectedField);
+                dataGridView1.Columns["comicId"].Visible = false;
+            }
+
         }
 
-        
+        void ChangeFields()
+        {
+            comboBoxSearchBy.Items.Clear();
+
+            if (library.isComicSelected)
+            {
+                comboBoxSearchBy.Items.AddRange(new string[] {
+                    "Title", "Author", "ReleaseYear", "Type", "Genre", "Status"
+                    });
+                dataGridView1.DataSource = library.comics;
+                dataGridView1.Columns["comicId"].Visible = false;
+            }
+            else
+            {
+                comboBoxSearchBy.Items.AddRange(new string[] {
+                     "Name", "Age", "Genre"
+                     });
+                dataGridView1.DataSource = library.characters;
+                dataGridView1.Columns["characterId"].Visible = false;
+                dataGridView1.Columns["description"].Visible = false;
+            }
+
+            comboBoxSearchBy.SelectedIndex = 0; // вибрати перше поле
+        }
+
+        private void newToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            library = new Library();
+            if (library.isComicSelected)
+            {
+                dataGridView1.DataSource = library.comics;
+                dataGridView1.Columns["comicId"].Visible = false;
+            }
+            else
+            {
+                dataGridView1.DataSource = null;
+                dataGridView1.DataSource = library.characters;
+                dataGridView1.Columns["comicId"].Visible = false;
+                dataGridView1.Columns["description"].Visible = false;
+            }
+
+        }
+
+        private void downloadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            library.ReadInfo();
+            //MessageBox.Show($"isComicSelected = {library.isComicSelected}");
+            if (library.isComicSelected)
+            {
+                dataGridView1.DataSource = null;
+                dataGridView1.DataSource = library.comics;
+                dataGridView1.Columns["comicId"].Visible = false;
+            }
+            else
+            {
+                dataGridView1.DataSource = null;
+                dataGridView1.DataSource = library.characters;
+                dataGridView1.Columns["comicId"].Visible = false;
+                dataGridView1.Columns["description"].Visible = false;
+            }
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            library.WriteNewInfo();
+        }
+
+        private void comicsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            library.isComicSelected = true;
+            ChangeFields();
+        }
+
+        private void charactersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            library.isComicSelected = false;
+            ChangeFields();
+        }
     }
 }

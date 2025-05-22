@@ -58,6 +58,45 @@ namespace MultiCOloredModernUI.Classes
             }
             return false;
         }
+
+        public bool HasIn(string srch, string column)
+        {
+            string element = "";
+            if (column == "title") element = title;
+            if (column == "author") element = author;
+            if (column == "releaseyear") element = releaseYear.ToString();
+            if (column == "type") element = type;
+            if (column == "genre") element = genre;
+            if (column == "status") element = status;
+
+            return element.ToLower().Contains(srch.ToLower());
+
+
+            //int j = 0;
+
+            //if (srch == "") return true;
+            //for (int i = 0; i < element.Length; i++)
+            //{
+            //    char a = char.ToLower(element[i]);
+            //    char b = char.ToLower(srch[j]);
+            //    if (a != b)
+            //    {
+            //        j = 0;
+            //        continue;
+            //    }
+            //    if (a == b)
+            //    {
+            //        j++;
+            //    }
+            //    if (j + 1 == srch.Length)
+            //    {
+            //        return true;
+            //    }
+            //}
+
+
+            //return false;
+        }
         //11111|AbobaTitle|AbobaAuthor|2023|manhva|fantasy|InProgress|-
     }
 }
