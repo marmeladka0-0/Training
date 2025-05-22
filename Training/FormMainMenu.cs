@@ -15,19 +15,19 @@ namespace Training
             // робить кнопку невидимою
 
             InitializeComponent();
-            button1.Visible = false;
-            button1.Enabled = false;
-            button2.Visible = false;
-            button2.Enabled = false;
+            //button1.Visible = false;
+            //button1.Enabled = false;
+            //button2.Visible = false;
+            //button2.Enabled = false;
 
-            label1.Visible = false;
-            label2.Visible = false;
-            label3.Visible = false;
+            //label1.Visible = false;
+            //label2.Visible = false;
+            //label3.Visible = false;
 
-            textBox1.Visible = false;
-            textBox1.Enabled = false;
-            textBox2.Visible = false;
-            textBox2.Enabled = false;
+            //textBox1.Visible = false;
+            //textBox1.Enabled = false;
+            //textBox2.Visible = false;
+            //textBox2.Enabled = false;
             library.WriteInfo();
             library.ReadInfo();
 
@@ -39,29 +39,29 @@ namespace Training
             //label3.Text = library.comics[0].ToString();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            textBox2.Clear();
-            int n = Convert.ToInt32(textBox1.Text);
-            matrix = new int[n];
-            Random rand = new Random();
-            for (int i = 0; i < n; i++)
-            {
-                matrix[i] = rand.Next(100);
-                textBox2.Text += matrix[i] + "  ";
-            }
+        //private void button1_Click(object sender, EventArgs e)
+        //{
+        //    textBox2.Clear();
+        //    int n = Convert.ToInt32(textBox1.Text);
+        //    matrix = new int[n];
+        //    Random rand = new Random();
+        //    for (int i = 0; i < n; i++)
+        //    {
+        //        matrix[i] = rand.Next(100);
+        //        textBox2.Text += matrix[i] + "  ";
+        //    }
 
-        }
+        //}
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            int minIdx = 0;
-            for (int i = 1; i < matrix.Length; i++)
-                if (matrix[minIdx] > matrix[i])
-                    minIdx = i;
-            label2.Text = " Мінімальне значення " +
-                matrix[minIdx] + "(номер " + minIdx + ")";
-        }
+        //private void button2_Click(object sender, EventArgs e)
+        //{
+        //    int minIdx = 0;
+        //    for (int i = 1; i < matrix.Length; i++)
+        //        if (matrix[minIdx] > matrix[i])
+        //            minIdx = i;
+        //    label2.Text = " Мінімальне значення " +
+        //        matrix[minIdx] + "(номер " + minIdx + ")";
+        //}
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
@@ -118,18 +118,28 @@ namespace Training
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            library = new Library();
-            if (library.isComicSelected)
+            var result = MessageBox.Show(
+               "Are you sure you want to start a new catalog?\n All unsaved data will be lost.",
+               "Confirmation",
+               MessageBoxButtons.YesNo,
+               MessageBoxIcon.Question
+             );
+
+            if (result == DialogResult.Yes)
             {
-                dataGridView1.DataSource = library.comics;
-                dataGridView1.Columns["comicId"].Visible = false;
-            }
-            else
-            {
-                dataGridView1.DataSource = null;
-                dataGridView1.DataSource = library.characters;
-                dataGridView1.Columns["comicId"].Visible = false;
-                dataGridView1.Columns["description"].Visible = false;
+                library = new Library();
+                if (library.isComicSelected)
+                {
+                    dataGridView1.DataSource = library.comics;
+                    dataGridView1.Columns["comicId"].Visible = false;
+                }
+                else
+                {
+                    dataGridView1.DataSource = null;
+                    dataGridView1.DataSource = library.characters;
+                    dataGridView1.Columns["comicId"].Visible = false;
+                    dataGridView1.Columns["description"].Visible = false;
+                }
             }
 
         }
@@ -168,6 +178,22 @@ namespace Training
         {
             library.isComicSelected = false;
             ChangeFields();
+        }
+
+        private void buttonAddComic_Click(object sender, EventArgs e)
+        {
+            FormAddComic form = new FormAddComic();
+            form.ShowDialog();
+
+            if (form.NewComic == null) { return; }
+            if (library.comics.Count == 0) { form.NewComic.comicID = 10000; } else
+            {
+                form.NewComic.comicID = library.comics.Last().comicID + 1;
+            }
+            library.comics.Add(form.NewComic);
+            dataGridView1.DataSource = null;
+            dataGridView1.DataSource = library.comics;
+            dataGridView1.Columns["comicId"].Visible = false;
         }
     }
 }
