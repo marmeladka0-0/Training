@@ -16,15 +16,15 @@ namespace MultiCOloredModernUI.Classes
         public char gender { get; set; }
         public int comicID { get; set; }
 
-        public void GetInfo()
-        {
-            Console.WriteLine("======================");
-            Console.WriteLine("Name:" + name);
-            Console.WriteLine("About:" + description);
-            Console.WriteLine("Age:" + age);
-            Console.WriteLine("Gender:" + gender);
-            Console.WriteLine("======================");
-        }
+        //public void GetInfo()
+        //{
+        //    Console.WriteLine("======================");
+        //    Console.WriteLine("Name:" + name);
+        //    Console.WriteLine("About:" + description);
+        //    Console.WriteLine("Age:" + age);
+        //    Console.WriteLine("Gender:" + gender);
+        //    Console.WriteLine("======================");
+        //}
 
         public string ToString()
         {
@@ -42,9 +42,10 @@ namespace MultiCOloredModernUI.Classes
         {
             string element = "";
             if (column == "name") element = name;
+            if (column == "description") element = description.ToString();
             if (column == "age") element = age.ToString();
             if (column == "gender") element = gender.ToString();
-
+            
             return element.ToLower().Contains(srch.ToLower());
 
         }

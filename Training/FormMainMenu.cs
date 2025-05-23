@@ -9,25 +9,14 @@ namespace Training
     {
         Library library = new Library();
 
-        public FormMainMenu()
+
+        public FormMainMenu()//CONSTRUCTOR
         {
             // робить кнопку невидимою
 
             InitializeComponent();
             //button1.Visible = false;
             //button1.Enabled = false;
-            //button2.Visible = false;
-            //button2.Enabled = false;
-
-            //label1.Visible = false;
-            //label2.Visible = false;
-            //label3.Visible = false;
-
-            //textBox1.Visible = false;
-            //textBox1.Enabled = false;
-            //textBox2.Visible = false;
-            //textBox2.Enabled = false;
-
 
             //library.WriteInfo();
             library.ReadInfo();
@@ -37,6 +26,7 @@ namespace Training
             dataGridView1.DataSource = library.comics;
             dataGridView1.Columns["comicId"].Visible = false;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            this.FormClosing += MainMenuClosing;
             //label3.Text = library.comics[0].ToString();
         }
 
@@ -64,7 +54,7 @@ namespace Training
         //        matrix[minIdx] + "(номер " + minIdx + ")";
         //}
 
-        private void btnSearch_Click(object sender, EventArgs e)
+        private void btnSearch_Click(object sender, EventArgs e)//SEARCH
         {
             string s = textBox3.Text;
             string selectedField = comboBoxSearchBy.SelectedItem.ToString().ToLower();
@@ -87,37 +77,12 @@ namespace Training
             else
             {
                 dataGridView1.DataSource = library.SearchCharacters(s, selectedField);
-                dataGridView1.Columns["comicId"].Visible = false;
-            }
-
-        }
-
-        void ChangeFields()
-        {
-            comboBoxSearchBy.Items.Clear();
-
-            if (library.isComicSelected)
-            {
-                comboBoxSearchBy.Items.AddRange(new string[] {
-                    "Title", "Author", "ReleaseYear", "Type", "Genre", "Status"
-                    });
-                dataGridView1.DataSource = library.comics;
-                dataGridView1.Columns["comicId"].Visible = false;
-            }
-            else
-            {
-                comboBoxSearchBy.Items.AddRange(new string[] {
-                     "Name", "Age", "Genre"
-                     });
-                dataGridView1.DataSource = library.characters;
                 dataGridView1.Columns["characterId"].Visible = false;
-                dataGridView1.Columns["description"].Visible = false;
             }
 
-            comboBoxSearchBy.SelectedIndex = 0; // вибрати перше поле
         }
 
-        private void newToolStripMenuItem_Click(object sender, EventArgs e)
+        private void newToolStripMenuItem_Click(object sender, EventArgs e)//NEW
         {
             var result = MessageBox.Show(
                "Are you sure you want to start a new catalog?\n All unsaved data will be lost.",
@@ -128,119 +93,241 @@ namespace Training
 
             if (result == DialogResult.Yes)
             {
-                library = new Library();
                 if (library.isComicSelected)
                 {
+                    library = new Library();
                     dataGridView1.DataSource = library.comics;
                     dataGridView1.Columns["comicId"].Visible = false;
                 }
                 else
                 {
+                    library = new Library();
+                    library.isComicSelected = false;
                     dataGridView1.DataSource = null;
                     dataGridView1.DataSource = library.characters;
+                    dataGridView1.Columns["characterID"].Visible = false;
                     dataGridView1.Columns["comicId"].Visible = false;
-                    dataGridView1.Columns["description"].Visible = false;
+                    //dataGridView1.Columns["description"].Visible = false;
                 }
             }
 
         }
 
-        private void downloadToolStripMenuItem_Click(object sender, EventArgs e)
+        private void downloadToolStripMenuItem_Click(object sender, EventArgs e)//DOWNLOAD
         {
-            library.ReadInfo();
             //MessageBox.Show($"isComicSelected = {library.isComicSelected}");
             if (library.isComicSelected)
             {
+                library.ReadInfo();
                 dataGridView1.DataSource = null;
                 dataGridView1.DataSource = library.comics;
                 dataGridView1.Columns["comicId"].Visible = false;
             }
             else
             {
+                library.ReadInfo();
                 dataGridView1.DataSource = null;
                 dataGridView1.DataSource = library.characters;
+                dataGridView1.Columns["characterID"].Visible = false;
                 dataGridView1.Columns["comicId"].Visible = false;
-                dataGridView1.Columns["description"].Visible = false;
+                //dataGridView1.Columns["description"].Visible = false;
             }
         }
 
-        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)//SAVE
         {
             library.WriteNewInfo();
         }
 
-        private void comicsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void comicsToolStripMenuItem_Click(object sender, EventArgs e)//SWITCH_COMIC
         {
             library.isComicSelected = true;
             ChangeFields();
         }
 
-        private void charactersToolStripMenuItem_Click(object sender, EventArgs e)
+        private void charactersToolStripMenuItem_Click(object sender, EventArgs e)//SWITCH_CH
         {
             library.isComicSelected = false;
             ChangeFields();
         }
-
-        private void buttonAddComic_Click(object sender, EventArgs e)
+        private void ChangeFields()//SW_HELP_F
         {
-            FormAddComic form = new FormAddComic();
-            form.ShowDialog();
+            comboBoxSearchBy.Items.Clear();
 
-            if (form.NewComic == null) { return; }
-            if (library.comics.Count == 0) { form.NewComic.comicID = 10000; }
+            if (library.isComicSelected)
+            {
+                comboBoxSearchBy.Items.AddRange(new string[] {
+                    "Title", "Author", "ReleaseYear", "Type", "Genre", "Status"
+                    });
+                dataGridView1.DataSource = library.comics;
+                dataGridView1.Columns["comicId"].Visible = false;
+                buttonAddCharacter.Enabled = true;
+                buttonAddCharacter.Visible = true;
+            }
             else
             {
-                form.NewComic.comicID = library.comics.Last().comicID + 1;
+                comboBoxSearchBy.Items.AddRange(new string[] {
+                     "Name", "Description", "Age", "Gender"
+                     });
+                dataGridView1.DataSource = library.characters;
+                dataGridView1.Columns["characterId"].Visible = false;
+                dataGridView1.Columns["comicId"].Visible = false;
+                buttonAddCharacter.Enabled = false;
+                buttonAddCharacter.Visible = false;
+                //dataGridView1.Columns["description"].Visible = false;
             }
-            library.comics.Add(form.NewComic);
-            dataGridView1.DataSource = null;
-            dataGridView1.DataSource = library.comics;
-            dataGridView1.Columns["comicId"].Visible = false;
+
+            comboBoxSearchBy.SelectedIndex = 0; // вибрати перше поле
         }
 
-        private void buttonDeleteComics_Click(object sender, EventArgs e)
+        private void buttonAddComic_Click(object sender, EventArgs e)//ADD
         {
-            var result = MessageBox.Show(
-               "Are you sure you want to delete this comic?",
-               "Confirmation",
-               MessageBoxButtons.YesNo,
-               MessageBoxIcon.Question
-             );
-
-            if (result == DialogResult.Yes)
+            if (library.isComicSelected)
             {
+                FormAddComic form = new FormAddComic();
+                form.ShowDialog();
+
+                if (form.NewComic == null) { return; }
+                if (library.comics.Count == 0) { form.NewComic.comicID = 10000; }
+                else
+                {
+                    form.NewComic.comicID = library.comics.Last().comicID + 1;
+                }
+                library.comics.Add(form.NewComic);
+                dataGridView1.DataSource = null;
+                dataGridView1.DataSource = library.comics;
+                dataGridView1.Columns["comicId"].Visible = false;
+            }
+            else
+            {
+                MessageBox.Show(
+                        "You can add characters only on the page with comics.\n" +
+                        "Please choose the comic.\n" +
+                        "And then push the 'Add Character' button.",
+                        "Information",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Question);
+                library.isComicSelected = true;
+                ChangeFields();
+            }
+        }
+
+        private void buttonDeleteComics_Click(object sender, EventArgs e)//DELETE
+        {
+            if (library.isComicSelected)
+            {
+                var result = MessageBox.Show(
+                   "Are you sure you want to delete this comic?",
+                   "Confirmation",
+                   MessageBoxButtons.YesNo,
+                   MessageBoxIcon.Question
+                   );
+
+                if (result == DialogResult.Yes)
+                {
+
+                    Comic selectedComic = (Comic)dataGridView1.SelectedRows[0].DataBoundItem;
+
+                    library.comics.Remove(selectedComic);
+
+                    dataGridView1.DataSource = null;
+                    dataGridView1.DataSource = library.comics;
+                    dataGridView1.Columns["comicID"].Visible = false;
+                }
+            }
+            else
+            {
+                var result = MessageBox.Show(
+                   "Are you sure you want to delete this character?",
+                   "Confirmation",
+                   MessageBoxButtons.YesNo,
+                   MessageBoxIcon.Question
+                   );
+
+                if (result == DialogResult.Yes)
+                {
+
+                    Character selectedCharacter = (Character)dataGridView1.SelectedRows[0].DataBoundItem;
+
+                    library.characters.Remove(selectedCharacter);
+
+                    dataGridView1.DataSource = null;
+                    dataGridView1.DataSource = library.characters;
+                    dataGridView1.Columns["characterID"].Visible = false;
+                    dataGridView1.Columns["comicID"].Visible = false;
+                }
+            }
+        }
+
+        private void buttonEditComic_Click(object sender, EventArgs e)//EDIT
+        {
+            if (library.isComicSelected)
+            {
+                if (dataGridView1.SelectedRows.Count == 0)
+                {
+                    MessageBox.Show(
+                        "Please add new comic before.",
+                        "Information",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Question);
+                    return;
+                }
 
                 Comic selectedComic = (Comic)dataGridView1.SelectedRows[0].DataBoundItem;
 
-                library.comics.Remove(selectedComic);
+                FormAddComic editForm = new FormAddComic(selectedComic);
+                editForm.ShowDialog();
 
                 dataGridView1.DataSource = null;
                 dataGridView1.DataSource = library.comics;
                 dataGridView1.Columns["comicID"].Visible = false;
             }
-
         }
 
-        private void buttonEditComic_Click(object sender, EventArgs e)
+        private void buttonAddCharacter_Click(object sender, EventArgs e)
         {
-            if (dataGridView1.SelectedRows.Count == 0)
+            Comic selectedComic = (Comic)dataGridView1.SelectedRows[0].DataBoundItem;
+            FormAddCharacter form = new FormAddCharacter(selectedComic);
+            form.ShowDialog();
+
+            if (form.NewCharacter == null) { return; }
+            if (library.characters.Count == 0) { form.NewCharacter.characterID = 20000; }
+            else
             {
-                MessageBox.Show(
-                    "Please add new comic before.",
-                    "Information",                       
-                    MessageBoxButtons.OK,                
-                    MessageBoxIcon.Question);
-                return;
+                form.NewCharacter.characterID = library.characters.Last().characterID + 1;
             }
 
-            Comic selectedComic = (Comic)dataGridView1.SelectedRows[0].DataBoundItem;
+            library.characters.Add(form.NewCharacter);
 
-            FormAddComic editForm = new FormAddComic(selectedComic);
-            editForm.ShowDialog();
+            if (form.OpenCharacters)
+            {
+                library.isComicSelected = false;
+                ChangeFields();
+            }
+            else
+            {
+                library.isComicSelected = true;
+                ChangeFields();
+            }
+        }
 
-            dataGridView1.DataSource = null;
-            dataGridView1.DataSource = library.comics;
-            dataGridView1.Columns["comicID"].Visible = false;
+        public void MainMenuClosing(object sender, FormClosingEventArgs e)
+        {
+            var result = MessageBox.Show(
+               "Do you want to save your data before.\n All unsaved data will be lost.",
+               "Confirmation",
+               MessageBoxButtons.YesNoCancel,
+               MessageBoxIcon.Question
+             );
+
+            if (result == DialogResult.Yes)
+            {
+                library.WriteNewInfo();
+            }
+            if (result == DialogResult.Cancel)
+            {
+                e.Cancel = true;
+            }
         }
     }
 }

@@ -225,7 +225,7 @@
             Controls.Add(panel2);
             Controls.Add(panel1);
             Name = "FormAddComic";
-            StartPosition = FormStartPosition.CenterScreen;
+            StartPosition = FormStartPosition.CenterParent;
             Text = "AddComic";
             panel1.ResumeLayout(false);
             panel2.ResumeLayout(false);

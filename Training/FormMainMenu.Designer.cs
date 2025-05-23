@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            buttonAddCharacter = new Button();
+            buttonDetails = new Button();
             buttonEditComic = new Button();
             buttonDeleteComics = new Button();
             buttonAddComic = new Button();
@@ -54,6 +56,8 @@
             // panel1
             // 
             panel1.BackColor = SystemColors.ActiveCaption;
+            panel1.Controls.Add(buttonAddCharacter);
+            panel1.Controls.Add(buttonDetails);
             panel1.Controls.Add(buttonEditComic);
             panel1.Controls.Add(buttonDeleteComics);
             panel1.Controls.Add(buttonAddComic);
@@ -63,13 +67,32 @@
             panel1.Size = new Size(207, 618);
             panel1.TabIndex = 6;
             // 
+            // buttonAddCharacter
+            // 
+            buttonAddCharacter.Location = new Point(12, 529);
+            buttonAddCharacter.Name = "buttonAddCharacter";
+            buttonAddCharacter.Size = new Size(180, 30);
+            buttonAddCharacter.TabIndex = 4;
+            buttonAddCharacter.Text = "Add Character";
+            buttonAddCharacter.UseVisualStyleBackColor = true;
+            buttonAddCharacter.Click += buttonAddCharacter_Click;
+            // 
+            // buttonDetails
+            // 
+            buttonDetails.Location = new Point(12, 487);
+            buttonDetails.Name = "buttonDetails";
+            buttonDetails.Size = new Size(180, 30);
+            buttonDetails.TabIndex = 3;
+            buttonDetails.Text = "See More Details";
+            buttonDetails.UseVisualStyleBackColor = true;
+            // 
             // buttonEditComic
             // 
             buttonEditComic.Location = new Point(12, 445);
             buttonEditComic.Name = "buttonEditComic";
             buttonEditComic.Size = new Size(180, 30);
             buttonEditComic.TabIndex = 2;
-            buttonEditComic.Text = "Edit comic's info";
+            buttonEditComic.Text = "Edit Selected";
             buttonEditComic.UseVisualStyleBackColor = true;
             buttonEditComic.Click += buttonEditComic_Click;
             // 
@@ -79,7 +102,7 @@
             buttonDeleteComics.Name = "buttonDeleteComics";
             buttonDeleteComics.Size = new Size(180, 30);
             buttonDeleteComics.TabIndex = 1;
-            buttonDeleteComics.Text = "Delete Selected Comic";
+            buttonDeleteComics.Text = "Delete Selected";
             buttonDeleteComics.UseVisualStyleBackColor = true;
             buttonDeleteComics.Click += buttonDeleteComics_Click;
             // 
@@ -90,7 +113,7 @@
             buttonAddComic.Name = "buttonAddComic";
             buttonAddComic.Size = new Size(180, 30);
             buttonAddComic.TabIndex = 0;
-            buttonAddComic.Text = "Add new comic";
+            buttonAddComic.Text = "Add New";
             buttonAddComic.UseVisualStyleBackColor = true;
             buttonAddComic.Click += buttonAddComic_Click;
             // 
@@ -253,5 +276,7 @@
         private Button buttonAddComic;
         private Button buttonDeleteComics;
         private Button buttonEditComic;
+        private Button buttonAddCharacter;
+        private Button buttonDetails;
     }
 }
