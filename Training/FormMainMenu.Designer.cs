@@ -69,6 +69,7 @@
             // 
             // buttonAddCharacter
             // 
+            buttonAddCharacter.Cursor = Cursors.Hand;
             buttonAddCharacter.Location = new Point(12, 529);
             buttonAddCharacter.Name = "buttonAddCharacter";
             buttonAddCharacter.Size = new Size(180, 30);
@@ -79,6 +80,7 @@
             // 
             // buttonDetails
             // 
+            buttonDetails.Cursor = Cursors.Hand;
             buttonDetails.Location = new Point(12, 487);
             buttonDetails.Name = "buttonDetails";
             buttonDetails.Size = new Size(180, 30);
@@ -88,6 +90,7 @@
             // 
             // buttonEditComic
             // 
+            buttonEditComic.Cursor = Cursors.Hand;
             buttonEditComic.Location = new Point(12, 445);
             buttonEditComic.Name = "buttonEditComic";
             buttonEditComic.Size = new Size(180, 30);
@@ -98,6 +101,7 @@
             // 
             // buttonDeleteComics
             // 
+            buttonDeleteComics.Cursor = Cursors.Hand;
             buttonDeleteComics.Location = new Point(12, 403);
             buttonDeleteComics.Name = "buttonDeleteComics";
             buttonDeleteComics.Size = new Size(180, 30);

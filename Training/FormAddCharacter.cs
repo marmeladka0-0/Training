@@ -57,6 +57,33 @@ namespace MultiCOloredModernUI
             OpenCharacters = checkBoxCharactersOpen.Checked;
 
             this.Close();
+
+        }
+        public FormAddCharacter(Character selectedCharacter)
+        {
+            InitializeComponent();
+            this.Text = "EditCharacter";
+            checkBoxCharactersOpen.Visible = false;
+            checkBoxCharactersOpen.Enabled = false;
+            this.Height = 326;
+            panel1.Height = 78;
+
+            labelComicTitle.Text = selectedCharacter.comicID.ToString(); //FIX
+
+            textBoxName.Text = selectedCharacter.name;
+            textBoxDescription.Text = selectedCharacter.description;
+            numericUpDownAge.Value = selectedCharacter.age;
+            if (selectedCharacter.gender.ToString() == "M")
+            {
+                comboBoxGender.SelectedItem = selectedCharacter.gender.ToString() + " - Male";
+            } else
+            {
+                comboBoxGender.SelectedItem = selectedCharacter.gender.ToString() + " - Female";
+            }
+            
+
+            NewCharacter = selectedCharacter;
         }
     }
+
 }

@@ -63,9 +63,9 @@
             // buttonCancelAddComic
             // 
             buttonCancelAddComic.Cursor = Cursors.Hand;
-            buttonCancelAddComic.Location = new Point(306, 30);
+            buttonCancelAddComic.Location = new Point(300, 30);
             buttonCancelAddComic.Name = "buttonCancelAddComic";
-            buttonCancelAddComic.Size = new Size(146, 34);
+            buttonCancelAddComic.Size = new Size(146, 35);
             buttonCancelAddComic.TabIndex = 1;
             buttonCancelAddComic.Text = "Cancel";
             buttonCancelAddComic.UseVisualStyleBackColor = true;
@@ -161,6 +161,7 @@
             // 
             // textBoxTitle
             // 
+            textBoxTitle.Cursor = Cursors.IBeam;
             textBoxTitle.Location = new Point(156, 12);
             textBoxTitle.Name = "textBoxTitle";
             textBoxTitle.Size = new Size(312, 27);
@@ -168,6 +169,7 @@
             // 
             // textBoxAuthor
             // 
+            textBoxAuthor.Cursor = Cursors.IBeam;
             textBoxAuthor.Location = new Point(156, 48);
             textBoxAuthor.Name = "textBoxAuthor";
             textBoxAuthor.Size = new Size(312, 27);
@@ -183,6 +185,7 @@
             // 
             // comboBoxType
             // 
+            comboBoxType.Cursor = Cursors.Hand;
             comboBoxType.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxType.FormattingEnabled = true;
             comboBoxType.Items.AddRange(new object[] { "Manga", "Manhwa", "Webtoon", "Comic book", "Manhua" });
@@ -193,6 +196,7 @@
             // 
             // comboBoxGenre
             // 
+            comboBoxGenre.Cursor = Cursors.Hand;
             comboBoxGenre.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxGenre.FormattingEnabled = true;
             comboBoxGenre.Items.AddRange(new object[] { "Action", "Adventure", "Comedy", "Crime", "Drama", "Historical", "Horror", "Mystery", "Romance", "Thriller", "Fantasy" });
@@ -203,6 +207,7 @@
             // 
             // comboBoxStatus
             // 
+            comboBoxStatus.Cursor = Cursors.Hand;
             comboBoxStatus.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxStatus.FormattingEnabled = true;
             comboBoxStatus.Items.AddRange(new object[] { "Completed", "Ongoing", "Paused" });

@@ -63,6 +63,7 @@
             // checkBoxCharactersOpen
             // 
             checkBoxCharactersOpen.AutoSize = true;
+            checkBoxCharactersOpen.Cursor = Cursors.Hand;
             checkBoxCharactersOpen.Location = new Point(40, 59);
             checkBoxCharactersOpen.Name = "checkBoxCharactersOpen";
             checkBoxCharactersOpen.Size = new Size(365, 24);
@@ -72,9 +73,10 @@
             // 
             // buttonCancel
             // 
+            buttonCancel.Cursor = Cursors.Hand;
             buttonCancel.Location = new Point(263, 25);
             buttonCancel.Name = "buttonCancel";
-            buttonCancel.Size = new Size(161, 28);
+            buttonCancel.Size = new Size(157, 29);
             buttonCancel.TabIndex = 1;
             buttonCancel.Text = "Cancel";
             buttonCancel.UseVisualStyleBackColor = true;
@@ -82,6 +84,7 @@
             // 
             // buttonSave
             // 
+            buttonSave.Cursor = Cursors.Hand;
             buttonSave.Location = new Point(40, 24);
             buttonSave.Name = "buttonSave";
             buttonSave.Size = new Size(157, 29);
@@ -154,12 +157,13 @@
             labelComicTitle.AutoSize = true;
             labelComicTitle.Location = new Point(156, 12);
             labelComicTitle.Name = "labelComicTitle";
-            labelComicTitle.Size = new Size(50, 20);
+            labelComicTitle.Size = new Size(91, 20);
             labelComicTitle.TabIndex = 2;
-            labelComicTitle.Text = "label1";
+            labelComicTitle.Text = "ComicName";
             // 
             // textBoxName
             // 
+            textBoxName.Cursor = Cursors.IBeam;
             textBoxName.Location = new Point(156, 48);
             textBoxName.Name = "textBoxName";
             textBoxName.Size = new Size(312, 27);
@@ -167,6 +171,7 @@
             // 
             // textBoxDescription
             // 
+            textBoxDescription.Cursor = Cursors.IBeam;
             textBoxDescription.Location = new Point(156, 84);
             textBoxDescription.Name = "textBoxDescription";
             textBoxDescription.Size = new Size(312, 27);
@@ -181,6 +186,8 @@
             // 
             // comboBoxGender
             // 
+            comboBoxGender.Cursor = Cursors.Hand;
+            comboBoxGender.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxGender.FormattingEnabled = true;
             comboBoxGender.Items.AddRange(new object[] { "M - Male", "F - Female" });
             comboBoxGender.Location = new Point(156, 156);

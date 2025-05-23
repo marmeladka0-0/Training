@@ -281,6 +281,24 @@ namespace Training
                 dataGridView1.DataSource = null;
                 dataGridView1.DataSource = library.comics;
                 dataGridView1.Columns["comicID"].Visible = false;
+            } else
+            {
+                if (dataGridView1.SelectedRows.Count == 0)
+                {
+                    MessageBox.Show(
+                        "Please add new character before.",
+                        "Information",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Question);
+                    return;
+                }
+
+                Character selectedCharacter = (Character)dataGridView1.SelectedRows[0].DataBoundItem;
+
+                FormAddCharacter editForm = new FormAddCharacter(selectedCharacter);
+                editForm.ShowDialog();
+
+                ChangeFields();
             }
         }
 
