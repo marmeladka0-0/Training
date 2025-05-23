@@ -7,7 +7,6 @@ namespace Training
 {
     public partial class FormMainMenu : Form
     {
-        int[] matrix;
         Library library = new Library();
 
         public FormMainMenu()
@@ -28,7 +27,9 @@ namespace Training
             //textBox1.Enabled = false;
             //textBox2.Visible = false;
             //textBox2.Enabled = false;
-            library.WriteInfo();
+
+
+            //library.WriteInfo();
             library.ReadInfo();
 
             comboBoxSearchBy.SelectedIndex = 0;
@@ -208,9 +209,8 @@ namespace Training
 
             if (result == DialogResult.Yes)
             {
-                DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
 
-                Comic selectedComic = (Comic)selectedRow.DataBoundItem;
+                Comic selectedComic = (Comic)dataGridView1.SelectedRows[0].DataBoundItem;
 
                 library.comics.Remove(selectedComic);
 
@@ -218,7 +218,29 @@ namespace Training
                 dataGridView1.DataSource = library.comics;
                 dataGridView1.Columns["comicID"].Visible = false;
             }
-            
+
+        }
+
+        private void buttonEditComic_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count == 0)
+            {
+                MessageBox.Show(
+                    "Please add new comic before.",
+                    "Information",                       
+                    MessageBoxButtons.OK,                
+                    MessageBoxIcon.Question);
+                return;
+            }
+
+            Comic selectedComic = (Comic)dataGridView1.SelectedRows[0].DataBoundItem;
+
+            FormAddComic editForm = new FormAddComic(selectedComic);
+            editForm.ShowDialog();
+
+            dataGridView1.DataSource = null;
+            dataGridView1.DataSource = library.comics;
+            dataGridView1.Columns["comicID"].Visible = false;
         }
     }
 }

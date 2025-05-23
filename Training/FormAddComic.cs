@@ -19,6 +19,7 @@ namespace MultiCOloredModernUI
         public FormAddComic()
         {
             InitializeComponent();
+            this.Text = "AddComic";
         }
 
         private void buttonCancelAddComic_Click(object sender, EventArgs e)
@@ -44,17 +45,31 @@ namespace MultiCOloredModernUI
                 return;
             }
 
-            Comic comic = new Comic();
+            if (NewComic == null)
+                NewComic = new Comic();
 
-            comic.title = textBoxTitle.Text;
-            comic.author = textBoxAuthor.Text;
-            comic.releaseYear = Convert.ToInt32(numericUpDownYear.Value);
-            comic.type = comboBoxType.SelectedItem.ToString().ToLower();
-            comic.genre = comboBoxGenre.SelectedItem.ToString().ToLower();
-            comic.status = comboBoxType.SelectedItem.ToString();
-
-            NewComic = comic;
+            NewComic.title = textBoxTitle.Text;
+            NewComic.author = textBoxAuthor.Text;
+            NewComic.releaseYear = Convert.ToInt32(numericUpDownYear.Value);
+            NewComic.type = comboBoxType.SelectedItem.ToString().ToLower();
+            NewComic.genre = comboBoxGenre.SelectedItem.ToString().ToLower();
+            NewComic.status = comboBoxStatus.SelectedItem.ToString();
+            
             this.Close();
+        }
+
+        public FormAddComic(Comic comicToEdit) : this()
+        {
+            this.Text = "EditComic";
+
+            textBoxTitle.Text = comicToEdit.title;
+            textBoxAuthor.Text = comicToEdit.author;
+            numericUpDownYear.Value = comicToEdit.releaseYear;
+            comboBoxType.SelectedItem = char.ToUpper(comicToEdit.type[0]) + comicToEdit.type.Substring(1);
+            comboBoxGenre.SelectedItem = char.ToUpper(comicToEdit.genre[0]) + comicToEdit.genre.Substring(1);
+            comboBoxStatus.SelectedItem = comicToEdit.status;
+
+            NewComic = comicToEdit;
         }
 
     }

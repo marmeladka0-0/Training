@@ -34,30 +34,30 @@ namespace MultiCOloredModernUI.Classes
             return comicInfo;
         }
 
-        public bool HasInTitle(string srch)
-        {
-            int j = 0;
-            if (srch == "") return true;
-            for (int i = 0; i < title.Length; i++)
-            {
-                char a = char.ToLower(title[i]);
-                char b = char.ToLower(srch[j]);
-                if (a != b)
-                {
-                    j = 0;
-                    continue;
-                }
-                if (a == b)
-                {
-                    j++;
-                }
-                if (j+1 == srch.Length)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
+        //public bool HasInTitle(string srch)
+        //{
+        //    int j = 0;
+        //    if (srch == "") return true;
+        //    for (int i = 0; i < title.Length; i++)
+        //    {
+        //        char a = char.ToLower(title[i]);
+        //        char b = char.ToLower(srch[j]);
+        //        if (a != b)
+        //        {
+        //            j = 0;
+        //            continue;
+        //        }
+        //        if (a == b)
+        //        {
+        //            j++;
+        //        }
+        //        if (j+1 == srch.Length)
+        //        {
+        //            return true;
+        //        }
+        //    }
+        //    return false;
+        //}
 
         public bool HasIn(string srch, string column)
         {

@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            buttonEditComic = new Button();
+            buttonDeleteComics = new Button();
             buttonAddComic = new Button();
             textBox3 = new TextBox();
             btnSearch = new Button();
@@ -44,7 +46,6 @@
             helpToolStripMenuItem = new ToolStripMenuItem();
             aboutToolStripMenuItem = new ToolStripMenuItem();
             comboBoxSearchBy = new ComboBox();
-            buttonDeleteComics = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             menuStrip1.SuspendLayout();
@@ -53,6 +54,7 @@
             // panel1
             // 
             panel1.BackColor = SystemColors.ActiveCaption;
+            panel1.Controls.Add(buttonEditComic);
             panel1.Controls.Add(buttonDeleteComics);
             panel1.Controls.Add(buttonAddComic);
             panel1.Dock = DockStyle.Left;
@@ -61,12 +63,32 @@
             panel1.Size = new Size(207, 618);
             panel1.TabIndex = 6;
             // 
+            // buttonEditComic
+            // 
+            buttonEditComic.Location = new Point(12, 445);
+            buttonEditComic.Name = "buttonEditComic";
+            buttonEditComic.Size = new Size(180, 30);
+            buttonEditComic.TabIndex = 2;
+            buttonEditComic.Text = "Edit comic's info";
+            buttonEditComic.UseVisualStyleBackColor = true;
+            buttonEditComic.Click += buttonEditComic_Click;
+            // 
+            // buttonDeleteComics
+            // 
+            buttonDeleteComics.Location = new Point(12, 403);
+            buttonDeleteComics.Name = "buttonDeleteComics";
+            buttonDeleteComics.Size = new Size(180, 30);
+            buttonDeleteComics.TabIndex = 1;
+            buttonDeleteComics.Text = "Delete Selected Comic";
+            buttonDeleteComics.UseVisualStyleBackColor = true;
+            buttonDeleteComics.Click += buttonDeleteComics_Click;
+            // 
             // buttonAddComic
             // 
             buttonAddComic.Cursor = Cursors.Hand;
-            buttonAddComic.Location = new Point(12, 48);
+            buttonAddComic.Location = new Point(12, 361);
             buttonAddComic.Name = "buttonAddComic";
-            buttonAddComic.Size = new Size(179, 29);
+            buttonAddComic.Size = new Size(180, 30);
             buttonAddComic.TabIndex = 0;
             buttonAddComic.Text = "Add new comic";
             buttonAddComic.UseVisualStyleBackColor = true;
@@ -189,16 +211,6 @@
             comboBoxSearchBy.Size = new Size(151, 28);
             comboBoxSearchBy.TabIndex = 12;
             // 
-            // buttonDeleteComics
-            // 
-            buttonDeleteComics.Location = new Point(16, 95);
-            buttonDeleteComics.Name = "buttonDeleteComics";
-            buttonDeleteComics.Size = new Size(177, 31);
-            buttonDeleteComics.TabIndex = 1;
-            buttonDeleteComics.Text = "Delete Selected Comic";
-            buttonDeleteComics.UseVisualStyleBackColor = true;
-            buttonDeleteComics.Click += buttonDeleteComics_Click;
-            // 
             // FormMainMenu
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -240,5 +252,6 @@
         private ComboBox comboBoxSearchBy;
         private Button buttonAddComic;
         private Button buttonDeleteComics;
+        private Button buttonEditComic;
     }
 }
