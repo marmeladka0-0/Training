@@ -167,7 +167,7 @@ namespace Training
             else
             {
                 comboBoxSearchBy.Items.AddRange(new string[] {
-                     "Name", "Description", "Age", "Gender"
+                     "Name", "Description", "Age", "Gender", "Status"
                      });
                 dataGridView1.DataSource = library.characters;
                 dataGridView1.Columns["characterId"].Visible = false;
@@ -281,7 +281,8 @@ namespace Training
                 dataGridView1.DataSource = null;
                 dataGridView1.DataSource = library.comics;
                 dataGridView1.Columns["comicID"].Visible = false;
-            } else
+            }
+            else
             {
                 if (dataGridView1.SelectedRows.Count == 0)
                 {
@@ -347,5 +348,6 @@ namespace Training
                 e.Cancel = true;
             }
         }
+
     }
 }

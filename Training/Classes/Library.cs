@@ -40,15 +40,15 @@ namespace MultiCOloredModernUI.Classes
                                 "10014|Scroll of Shadows|Mei Tanaka|2022|manga|fantasy|Hiatus|-",
                                 "10015|Cyber Heart|Anna Petrova|2021|webtoon|sci-fi|InProgress|-"};
 
-            string[] lineCharacters = {"20001|Kaida|Skilled assassin|23|F|10001",
-                                        "20002|Ryo|Team leader|30|M|10001",
-                                        "20003|Hana|Moon goddess|19|F|10002",
-                                        "20005|Nova|AI companion|5|F|10003",
-                                        "20006|Kenta|Dragon warrior|17|M|10003",
-                                        "20007|Ella|Scientist|26|F|10004",
-                                        "20008|Leo|Detective|35|M|10004",
-                                        "20009|Soojin|Mayor’s daughter|20|F|10005",
-                                        "20010|Akira|Silent observer|40|M|10005"};
+            string[] lineCharacters = { "20001|Kaida|Skilled assassin|23|F|alive|10001",
+                                        "20002|Ryo|Team leader|30|M|alive|10001",
+                                        "20003|Hana|Moon goddess|19|F|alive|10002",
+                                        "20005|Nova|AI companion|5|F|alive|10003",
+                                        "20006|Kenta|Dragon warrior|17|M|alive|10003",
+                                        "20007|Ella|Scientist|26|F|alive|10004",
+                                        "20008|Leo|Detective|35|M|dead|10004",
+                                        "20009|Soojin|Mayor’s daughter|20|F|alive|10005",
+                                        "20010|Akira|Silent observer|40|M|alive|10005"};
 
 
             //var writer = new StreamWriter("Input_Data/LibraryInfo.txt");
@@ -109,7 +109,8 @@ namespace MultiCOloredModernUI.Classes
                 newCharacter.description = addinfo[2];
                 newCharacter.age = Convert.ToUInt16(addinfo[3]);
                 newCharacter.gender = Convert.ToChar(addinfo[4]);
-                newCharacter.comicID = Convert.ToInt32(addinfo[5]);
+                newCharacter.status = addinfo[5];
+                newCharacter.comicID = Convert.ToInt32(addinfo[6]);
                 characters.Add(newCharacter);
             }
             reader.Close();

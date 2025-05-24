@@ -33,6 +33,7 @@
             buttonCancel = new Button();
             buttonSave = new Button();
             panel2 = new Panel();
+            label1 = new Label();
             labelGender = new Label();
             labelAge = new Label();
             labelDescription = new Label();
@@ -43,6 +44,7 @@
             textBoxDescription = new TextBox();
             numericUpDownAge = new NumericUpDown();
             comboBoxGender = new ComboBox();
+            comboBoxStatus = new ComboBox();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDownAge).BeginInit();
@@ -55,7 +57,7 @@
             panel1.Controls.Add(buttonCancel);
             panel1.Controls.Add(buttonSave);
             panel1.Dock = DockStyle.Bottom;
-            panel1.Location = new Point(0, 201);
+            panel1.Location = new Point(0, 237);
             panel1.Name = "panel1";
             panel1.Size = new Size(482, 102);
             panel1.TabIndex = 0;
@@ -96,6 +98,7 @@
             // panel2
             // 
             panel2.BackColor = SystemColors.ControlLight;
+            panel2.Controls.Add(label1);
             panel2.Controls.Add(labelGender);
             panel2.Controls.Add(labelAge);
             panel2.Controls.Add(labelDescription);
@@ -104,8 +107,17 @@
             panel2.Dock = DockStyle.Left;
             panel2.Location = new Point(0, 0);
             panel2.Name = "panel2";
-            panel2.Size = new Size(144, 201);
+            panel2.Size = new Size(144, 237);
             panel2.TabIndex = 1;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(12, 192);
+            label1.Name = "label1";
+            label1.Size = new Size(49, 20);
+            label1.TabIndex = 5;
+            label1.Text = "Status";
             // 
             // labelGender
             // 
@@ -195,11 +207,22 @@
             comboBoxGender.Size = new Size(312, 28);
             comboBoxGender.TabIndex = 6;
             // 
+            // comboBoxStatus
+            // 
+            comboBoxStatus.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxStatus.FormattingEnabled = true;
+            comboBoxStatus.Items.AddRange(new object[] { "dead", "alive" });
+            comboBoxStatus.Location = new Point(156, 192);
+            comboBoxStatus.Name = "comboBoxStatus";
+            comboBoxStatus.Size = new Size(312, 28);
+            comboBoxStatus.TabIndex = 7;
+            // 
             // FormAddCharacter
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(482, 303);
+            ClientSize = new Size(482, 339);
+            Controls.Add(comboBoxStatus);
             Controls.Add(comboBoxGender);
             Controls.Add(numericUpDownAge);
             Controls.Add(textBoxDescription);
@@ -236,5 +259,7 @@
         private NumericUpDown numericUpDownAge;
         private ComboBox comboBoxGender;
         private CheckBox checkBoxCharactersOpen;
+        private Label label1;
+        private ComboBox comboBoxStatus;
     }
 }

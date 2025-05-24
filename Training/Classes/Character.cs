@@ -14,6 +14,7 @@ namespace MultiCOloredModernUI.Classes
         public string? description { get; set; }
         public ushort age { get; set; }
         public char gender { get; set; }
+        public string status { get; set; }
         public int comicID { get; set; }
 
         //public void GetInfo()
@@ -34,6 +35,7 @@ namespace MultiCOloredModernUI.Classes
             characterInfo += description + "|";
             characterInfo += age + "|";
             characterInfo += gender + "|";
+            characterInfo += status + "|";
             characterInfo += comicID;
             return characterInfo;
         }
@@ -45,7 +47,8 @@ namespace MultiCOloredModernUI.Classes
             if (column == "description") element = description.ToString();
             if (column == "age") element = age.ToString();
             if (column == "gender") element = gender.ToString();
-            
+            if (column == "status") element = status.ToString();
+
             return element.ToLower().Contains(srch.ToLower());
 
         }

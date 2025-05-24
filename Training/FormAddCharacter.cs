@@ -53,6 +53,7 @@ namespace MultiCOloredModernUI
             NewCharacter.description = textBoxDescription.Text;
             NewCharacter.age = Convert.ToUInt16(numericUpDownAge.Value);
             NewCharacter.gender = comboBoxGender.SelectedItem.ToString()[0];
+            NewCharacter.status = comboBoxStatus.SelectedItem.ToString();
 
             OpenCharacters = checkBoxCharactersOpen.Checked;
 
@@ -65,7 +66,7 @@ namespace MultiCOloredModernUI
             this.Text = "EditCharacter";
             checkBoxCharactersOpen.Visible = false;
             checkBoxCharactersOpen.Enabled = false;
-            this.Height = 326;
+            this.Height = 362;
             panel1.Height = 78;
 
             labelComicTitle.Text = selectedCharacter.comicID.ToString(); //FIX
@@ -73,6 +74,7 @@ namespace MultiCOloredModernUI
             textBoxName.Text = selectedCharacter.name;
             textBoxDescription.Text = selectedCharacter.description;
             numericUpDownAge.Value = selectedCharacter.age;
+            comboBoxStatus.SelectedItem = selectedCharacter.status.ToString();
             if (selectedCharacter.gender.ToString() == "M")
             {
                 comboBoxGender.SelectedItem = selectedCharacter.gender.ToString() + " - Male";
