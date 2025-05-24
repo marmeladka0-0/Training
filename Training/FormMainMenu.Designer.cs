@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            buttonCancel = new Button();
+            buttonSelect = new Button();
             buttonAddCharacter = new Button();
             buttonDetails = new Button();
             buttonEditComic = new Button();
@@ -50,7 +52,10 @@
             aboutToolStripMenuItem = new ToolStripMenuItem();
             comboBoxSearchBy = new ComboBox();
             panel2 = new Panel();
+            label8 = new Label();
+            label7 = new Label();
             panel3 = new Panel();
+            buttonSC = new Button();
             label4 = new Label();
             label3 = new Label();
             label2 = new Label();
@@ -69,6 +74,7 @@
             radioButton1 = new RadioButton();
             label6 = new Label();
             label5 = new Label();
+            panel5 = new Panel();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             menuStrip1.SuspendLayout();
@@ -78,11 +84,14 @@
             ((System.ComponentModel.ISupportInitialize)numericUpDownTo).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownFrom).BeginInit();
             groupBox1.SuspendLayout();
+            panel5.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
             // 
             panel1.BackColor = SystemColors.ActiveCaption;
+            panel1.Controls.Add(buttonCancel);
+            panel1.Controls.Add(buttonSelect);
             panel1.Controls.Add(buttonAddCharacter);
             panel1.Controls.Add(buttonDetails);
             panel1.Controls.Add(buttonEditComic);
@@ -94,10 +103,30 @@
             panel1.Size = new Size(207, 618);
             panel1.TabIndex = 6;
             // 
+            // buttonCancel
+            // 
+            buttonCancel.Location = new Point(12, 576);
+            buttonCancel.Name = "buttonCancel";
+            buttonCancel.Size = new Size(180, 30);
+            buttonCancel.TabIndex = 6;
+            buttonCancel.Text = "Cancel";
+            buttonCancel.UseVisualStyleBackColor = true;
+            buttonCancel.Click += buttonCancel_Click;
+            // 
+            // buttonSelect
+            // 
+            buttonSelect.Location = new Point(12, 495);
+            buttonSelect.Name = "buttonSelect";
+            buttonSelect.Size = new Size(180, 75);
+            buttonSelect.TabIndex = 5;
+            buttonSelect.Text = "Select Comic";
+            buttonSelect.UseVisualStyleBackColor = true;
+            buttonSelect.Click += buttonSelect_Click;
+            // 
             // buttonAddCharacter
             // 
             buttonAddCharacter.Cursor = Cursors.Hand;
-            buttonAddCharacter.Location = new Point(12, 529);
+            buttonAddCharacter.Location = new Point(12, 459);
             buttonAddCharacter.Name = "buttonAddCharacter";
             buttonAddCharacter.Size = new Size(180, 30);
             buttonAddCharacter.TabIndex = 4;
@@ -108,7 +137,7 @@
             // buttonDetails
             // 
             buttonDetails.Cursor = Cursors.Hand;
-            buttonDetails.Location = new Point(12, 487);
+            buttonDetails.Location = new Point(12, 417);
             buttonDetails.Name = "buttonDetails";
             buttonDetails.Size = new Size(180, 30);
             buttonDetails.TabIndex = 3;
@@ -118,7 +147,7 @@
             // buttonEditComic
             // 
             buttonEditComic.Cursor = Cursors.Hand;
-            buttonEditComic.Location = new Point(12, 445);
+            buttonEditComic.Location = new Point(12, 375);
             buttonEditComic.Name = "buttonEditComic";
             buttonEditComic.Size = new Size(180, 30);
             buttonEditComic.TabIndex = 2;
@@ -129,7 +158,7 @@
             // buttonDeleteComics
             // 
             buttonDeleteComics.Cursor = Cursors.Hand;
-            buttonDeleteComics.Location = new Point(12, 403);
+            buttonDeleteComics.Location = new Point(12, 333);
             buttonDeleteComics.Name = "buttonDeleteComics";
             buttonDeleteComics.Size = new Size(180, 30);
             buttonDeleteComics.TabIndex = 1;
@@ -140,7 +169,7 @@
             // buttonAddComic
             // 
             buttonAddComic.Cursor = Cursors.Hand;
-            buttonAddComic.Location = new Point(12, 361);
+            buttonAddComic.Location = new Point(12, 291);
             buttonAddComic.Name = "buttonAddComic";
             buttonAddComic.Size = new Size(180, 30);
             buttonAddComic.TabIndex = 0;
@@ -275,6 +304,7 @@
             // panel2
             // 
             panel2.BackColor = SystemColors.ControlLightLight;
+            panel2.Controls.Add(panel5);
             panel2.Controls.Add(panel3);
             panel2.Controls.Add(panel4);
             panel2.Controls.Add(comboBoxGenre);
@@ -289,9 +319,28 @@
             panel2.Size = new Size(428, 215);
             panel2.TabIndex = 13;
             // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new Point(1, 4);
+            label8.Name = "label8";
+            label8.Size = new Size(18, 20);
+            label8.TabIndex = 15;
+            label8.Text = "...";
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(1, 38);
+            label7.Name = "label7";
+            label7.Size = new Size(18, 20);
+            label7.TabIndex = 14;
+            label7.Text = "...";
+            // 
             // panel3
             // 
             panel3.BackColor = SystemColors.ControlLight;
+            panel3.Controls.Add(buttonSC);
             panel3.Controls.Add(label4);
             panel3.Controls.Add(label3);
             panel3.Controls.Add(label2);
@@ -301,6 +350,16 @@
             panel3.Name = "panel3";
             panel3.Size = new Size(125, 162);
             panel3.TabIndex = 8;
+            // 
+            // buttonSC
+            // 
+            buttonSC.Location = new Point(67, 122);
+            buttonSC.Name = "buttonSC";
+            buttonSC.Size = new Size(46, 29);
+            buttonSC.TabIndex = 4;
+            buttonSC.Text = "Add";
+            buttonSC.UseVisualStyleBackColor = true;
+            buttonSC.Click += buttonSC_Click;
             // 
             // label4
             // 
@@ -479,6 +538,16 @@
             label5.TabIndex = 1;
             label5.Text = "from";
             // 
+            // panel5
+            // 
+            panel5.BackColor = SystemColors.ControlLight;
+            panel5.Controls.Add(label8);
+            panel5.Controls.Add(label7);
+            panel5.Location = new Point(275, 49);
+            panel5.Name = "panel5";
+            panel5.Size = new Size(138, 62);
+            panel5.TabIndex = 16;
+            // 
             // FormMainMenu
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -508,6 +577,8 @@
             ((System.ComponentModel.ISupportInitialize)numericUpDownFrom).EndInit();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
+            panel5.ResumeLayout(false);
+            panel5.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -554,5 +625,11 @@
         private ToolStripMenuItem importTestDataToolStripMenuItem;
         private Button buttonClear;
         private RadioButton radioButtonNone;
+        private Button buttonSelect;
+        private Button buttonSC;
+        private Button buttonCancel;
+        private Label label7;
+        private Label label8;
+        private Panel panel5;
     }
 }

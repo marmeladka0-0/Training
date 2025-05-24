@@ -17,8 +17,9 @@ namespace MultiCOloredModernUI.Classes
         public List<Comic> comics = new List<Comic>();
         public List<Comic> selectedComics = new List<Comic>();
         public List<Character> characters = new List<Character>();
+        public List<Character> selectedCharacters = new List<Character>();
         public bool isComicSelected = true;
-
+        public Comic? selectedC = null;
         //public Comic[]? comics {  get; set; }
         //public Character[]? characters { get; set; }
 
@@ -225,7 +226,7 @@ namespace MultiCOloredModernUI.Classes
 
         public List<Character> SearchCharacters(string str, string column)
         {
-            List<Character> selectedCharacters = [];
+            selectedCharacters = new List<Character>(); ;
 
             foreach (Character character in characters)
             {

@@ -3,6 +3,8 @@ using System.Drawing.Drawing2D;
 using System.Runtime.InteropServices;
 using MultiCOloredModernUI.Classes;
 using System.Windows.Forms;
+using System;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Training
 {
@@ -29,6 +31,15 @@ namespace Training
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             this.FormClosing += MainMenuClosing;
             radioButtonNone.Visible = false;
+            buttonSelect.Enabled = false;
+            buttonSelect.Visible = false;
+            buttonSC.Enabled = false;
+            buttonSC.Visible = false;
+            buttonCancel.Enabled = false;
+            buttonCancel.Visible = false;
+            panel5.Visible = false;
+            label7.Text = "";
+            label8.Text = "";
             //label3.Text = library.comics[0].ToString();
         }
 
@@ -75,11 +86,13 @@ namespace Training
             {
                 dataGridView1.DataSource = library.SearchComics(s, selectedField);
                 dataGridView1.Columns["comicId"].Visible = false;
+                buttonFilter.PerformClick();
             }
             else
             {
                 dataGridView1.DataSource = library.SearchCharacters(s, selectedField);
                 dataGridView1.Columns["characterId"].Visible = false;
+                buttonFilter.PerformClick();
             }
 
         }
@@ -156,6 +169,8 @@ namespace Training
         private void ChangeFields()//SW_HELP_F
         {
             comboBoxSearchBy.Items.Clear();
+            comboBoxType.Items.Clear();
+            comboBoxGenre.Items.Clear();
 
             if (library.isComicSelected)
             {
@@ -166,6 +181,24 @@ namespace Training
                 dataGridView1.Columns["comicId"].Visible = false;
                 buttonAddCharacter.Enabled = true;
                 buttonAddCharacter.Visible = true;
+                label1.Text = "Released Year";
+                label2.Text = "Type";
+                comboBoxType.Items.AddRange(new string[] {
+                    "Manga", "Manhwa", "Webtoon", "Comic book", "Manhua"
+                    });
+                label3.Text = "Genre";
+                comboBoxGenre.Items.AddRange(new string[] {
+                    "Action", "Adventure", "Comedy", "Crime", "Drama", "Historical", "Horror", "Mystery", "Romance", "Thriller", "Fantasy"
+                    });
+                label4.Text = "Status";
+                groupBox1.Enabled = true;
+                groupBox1.Visible = true;
+                buttonSC.Enabled = false;
+                buttonSC.Visible = false;
+                panel5.Visible = false;
+                label7.Text = "";
+                label8.Text = "";
+                library.selectedC = null;
             }
             else
             {
@@ -177,6 +210,20 @@ namespace Training
                 dataGridView1.Columns["comicId"].Visible = false;
                 buttonAddCharacter.Enabled = false;
                 buttonAddCharacter.Visible = false;
+                label1.Text = "Age";
+                label2.Text = "Gender";
+                comboBoxType.Items.AddRange(new string[] {
+                    "F", "M"
+                    });
+                label3.Text = "Status";
+                comboBoxGenre.Items.AddRange(new string[] {
+                    "Dead", "Alive"
+                    });
+                label4.Text = "Comic";
+                groupBox1.Enabled = false;
+                groupBox1.Visible = false;
+                buttonSC.Enabled = true;
+                buttonSC.Visible = true;
                 //dataGridView1.Columns["description"].Visible = false;
             }
 
@@ -387,69 +434,234 @@ namespace Training
             library.FillWithTestData();
         }
 
-        private void button1_Click(object sender, EventArgs e)//FILTER_COMICS
+        private void button1_Click(object sender, EventArgs e)//FILTER
         {
-            List<Comic> newComicList = new List<Comic>();
-            List<Comic> ComicListBefore = library.selectedComics;
-
-            if (ComicListBefore.Count == 0)
+            if (library.isComicSelected)
             {
-                ComicListBefore = library.comics;
-            }
+                List<Comic> newComicList = new List<Comic>();
+                List<Comic> ComicListBefore = library.selectedComics;
 
-            int? fromYear = null;
-            int? toYear = null;
-            string? type = null;
-            string? genre = null;
-            string? status = null;
+                if (ComicListBefore.Count == 0)
+                {
+                    ComicListBefore = library.comics;
+                }
 
-            if (numericUpDownFrom.Value != 0)
-            {
-                fromYear = Convert.ToInt32(numericUpDownFrom.Value);
-            }
-            if (numericUpDownTo.Value != 0)
-            {
-                toYear = Convert.ToInt32(numericUpDownTo.Value);
-            }
-            if (comboBoxType.Text != "")
-            {
-                type = comboBoxType.Text;
-            }
-            if (comboBoxGenre.Text != "")
-            {
-                genre = comboBoxGenre.Text;
-            }
+                int? fromYear = null;
+                int? toYear = null;
+                string? type = null;
+                string? genre = null;
+                string? status = null;
 
-            if (radioButton1.Checked)
-                status = radioButton1.Text;
-            else if (radioButton2.Checked)
-                status = radioButton2.Text;
-            else if (radioButton3.Checked)
-                status = radioButton3.Text;
+                if (numericUpDownFrom.Value != 0)
+                {
+                    fromYear = Convert.ToInt32(numericUpDownFrom.Value);
+                }
+                if (numericUpDownTo.Value != 0)
+                {
+                    toYear = Convert.ToInt32(numericUpDownTo.Value);
+                }
+                if (comboBoxType.Text != "")
+                {
+                    type = comboBoxType.Text;
+                }
+                if (comboBoxGenre.Text != "")
+                {
+                    genre = comboBoxGenre.Text;
+                }
 
-            foreach (Comic item in ComicListBefore)
+                if (radioButton1.Checked)
+                    status = radioButton1.Text;
+                else if (radioButton2.Checked)
+                    status = radioButton2.Text;
+                else if (radioButton3.Checked)
+                    status = radioButton3.Text;
+
+                foreach (Comic item in ComicListBefore)
+                {
+                    bool checker = true;
+                    if (fromYear != null && fromYear > item.releaseYear) { checker = false; }
+                    if (toYear != null && toYear < item.releaseYear) { checker = false; }
+                    if (type != null && type.ToLower() != item.type) { checker = false; }
+                    if (genre != null && genre.ToLower() != item.genre) { checker = false; }
+                    if (status != null && status != item.status) { checker = false; }
+                    if (checker == true) { newComicList.Add(item); }
+                }
+
+                dataGridView1.DataSource = newComicList;
+            } else
             {
-                bool checker = true;
-                if (fromYear != null && fromYear > item.releaseYear) { checker = false; }
-                if (toYear != null && toYear < item.releaseYear) { checker = false; }
-                if (type != null && type.ToLower() != item.type) { checker = false; }
-                if (genre != null && genre.ToLower() != item.genre) { checker = false; }
-                if (status != null && status != item.status) { checker = false; }
-                if (checker == true) { newComicList.Add(item); }
-            }
+                List<Character> newComicList = new List<Character>();
+                List<Character> ComicListBefore = library.selectedCharacters;
 
-            dataGridView1.DataSource = newComicList;
+                if (ComicListBefore.Count == 0)
+                {
+                    ComicListBefore = library.characters;
+                }
+
+                int? fromYear = null;
+                int? toYear = null;
+                char? gender = null;
+                string? status = null;
+                Comic? comic = library.selectedC;
+
+                if (numericUpDownFrom.Value != 0)
+                {
+                    fromYear = Convert.ToInt32(numericUpDownFrom.Value);
+                }
+                if (numericUpDownTo.Value != 0)
+                {
+                    toYear = Convert.ToInt32(numericUpDownTo.Value);
+                }
+                if (comboBoxType.Text != "")
+                {
+                    gender = comboBoxType.Text[0];
+                }
+                if (comboBoxGenre.Text != "")
+                {
+                    status = comboBoxGenre.Text;
+                }
+
+
+                foreach (Character item in ComicListBefore)
+                {
+                    bool checker = true;
+                    if (fromYear != null && fromYear > item.age) { checker = false; }
+                    if (toYear != null && toYear < item.age) { checker = false; }
+                    if (gender != null && gender != item.gender) { checker = false; }
+                    if (status != null && status.ToLower() != item.status) { checker = false; }
+                    if (comic != null && comic.comicID != item.comicID) { checker = false; }
+                    if (checker == true) { newComicList.Add(item); }
+                }
+
+                dataGridView1.DataSource = newComicList;
+            }
+            
 
         }
 
         private void buttonClear_Click(object sender, EventArgs e)
         {
-            numericUpDownFrom.Value = 0;
-            numericUpDownTo.Value = 0;
+            if (library.isComicSelected)
+            {
+                numericUpDownFrom.Value = 0;
+                numericUpDownTo.Value = 0;
 
-            comboBoxType.SelectedIndex = -1;
-            comboBoxGenre.SelectedIndex = -1;
-            radioButtonNone.Checked = true;
+                comboBoxType.SelectedIndex = -1;
+                comboBoxGenre.SelectedIndex = -1;
+                radioButtonNone.Checked = true;
+
+                if (library.selectedComics.Count == 0)
+                {
+                    dataGridView1.DataSource = library.comics;
+                } else
+                {
+                    dataGridView1.DataSource = library.selectedComics;
+                }
+            } else
+            {
+                numericUpDownFrom.Value = 0;
+                numericUpDownTo.Value = 0;
+
+                comboBoxType.SelectedIndex = -1;
+                comboBoxGenre.SelectedIndex = -1;
+                library.selectedC = null;
+                panel5.Visible = false;
+                label7.Text = "";
+                label8.Text = "";
+
+                if (library.selectedCharacters.Count == 0)
+                {
+                    dataGridView1.DataSource = library.characters;
+                }
+                else
+                {
+                    dataGridView1.DataSource = library.selectedCharacters;
+                }
+            }
+            
+        }
+
+        private void buttonSC_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count == 0)
+            {
+                MessageBox.Show(
+                    "Please add new comic or character before.",
+                    "Information",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Question);
+                return;
+            }
+
+            library.isComicSelected = true;
+            ChangeFields();
+            buttonSelect.Enabled = true;
+            buttonSelect.Visible = true;
+            buttonCancel.Enabled = true;
+            buttonCancel.Visible = true;
+
+            buttonAddComic.Enabled = false;
+            buttonAddComic.Visible = false;
+            buttonDeleteComics.Enabled = false;
+            buttonDeleteComics.Visible = false;
+            buttonEditComic.Enabled = false;
+            buttonEditComic.Visible = false;
+            buttonDetails.Enabled = false;
+            buttonDetails.Visible = false;
+            buttonAddCharacter.Enabled = false;
+            buttonAddCharacter.Visible = false;
+            menuStrip1.Enabled = false;
+            menuStrip1.Visible = false;
+        }
+
+        private void buttonSelect_Click(object sender, EventArgs e)
+        {
+            library.selectedC = (Comic)dataGridView1.SelectedRows[0].DataBoundItem;
+            buttonSelect.Enabled = false;
+            buttonSelect.Visible = false;
+            buttonCancel.Enabled = false;
+            buttonCancel.Visible = false;
+
+            buttonAddComic.Enabled = true;
+            buttonAddComic.Visible = true;
+            buttonDeleteComics.Enabled = true;
+            buttonDeleteComics.Visible = true;
+            buttonEditComic.Enabled = true;
+            buttonEditComic.Visible = true;
+            buttonDetails.Enabled = true;
+            buttonDetails.Visible = true;
+            buttonAddCharacter.Enabled = true;
+            buttonAddCharacter.Visible = true;
+            library.isComicSelected = false;
+            ChangeFields();
+            label8.Text = "Selected comic:";
+            label7.Text = library.selectedC.title;
+            panel5.Visible = true;
+            menuStrip1.Enabled = true;
+            menuStrip1.Visible = true;
+        }
+
+        private void buttonCancel_Click(object sender, EventArgs e)
+        {
+            buttonSelect.Enabled = false;
+            buttonSelect.Visible = false;
+            buttonCancel.Enabled = false;
+            buttonCancel.Visible = false;
+
+            buttonAddComic.Enabled = true;
+            buttonAddComic.Visible = true;
+            buttonDeleteComics.Enabled = true;
+            buttonDeleteComics.Visible = true;
+            buttonEditComic.Enabled = true;
+            buttonEditComic.Visible = true;
+            buttonDetails.Enabled = true;
+            buttonDetails.Visible = true;
+            buttonAddCharacter.Enabled = true;
+            buttonAddCharacter.Visible = true;
+            library.isComicSelected = false;
+            menuStrip1.Enabled = true;
+            menuStrip1.Visible = true;
+            ChangeFields();
         }
     }
 }
