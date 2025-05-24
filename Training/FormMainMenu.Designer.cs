@@ -42,6 +42,7 @@
             newToolStripMenuItem = new ToolStripMenuItem();
             downloadToolStripMenuItem = new ToolStripMenuItem();
             saveToolStripMenuItem = new ToolStripMenuItem();
+            importTestDataToolStripMenuItem = new ToolStripMenuItem();
             contentToolStripMenuItem = new ToolStripMenuItem();
             comicsToolStripMenuItem = new ToolStripMenuItem();
             charactersToolStripMenuItem = new ToolStripMenuItem();
@@ -49,32 +50,34 @@
             aboutToolStripMenuItem = new ToolStripMenuItem();
             comboBoxSearchBy = new ComboBox();
             panel2 = new Panel();
-            comboBox2 = new ComboBox();
-            comboBox1 = new ComboBox();
-            numericUpDown2 = new NumericUpDown();
-            numericUpDown1 = new NumericUpDown();
-            groupBox1 = new GroupBox();
-            radioButton3 = new RadioButton();
-            radioButton2 = new RadioButton();
-            radioButton1 = new RadioButton();
-            label6 = new Label();
-            label5 = new Label();
-            panel4 = new Panel();
             panel3 = new Panel();
             label4 = new Label();
             label3 = new Label();
             label2 = new Label();
             label1 = new Label();
-            button1 = new Button();
+            panel4 = new Panel();
+            buttonClear = new Button();
+            buttonFilter = new Button();
+            comboBoxGenre = new ComboBox();
+            comboBoxType = new ComboBox();
+            numericUpDownTo = new NumericUpDown();
+            numericUpDownFrom = new NumericUpDown();
+            groupBox1 = new GroupBox();
+            radioButtonNone = new RadioButton();
+            radioButton3 = new RadioButton();
+            radioButton2 = new RadioButton();
+            radioButton1 = new RadioButton();
+            label6 = new Label();
+            label5 = new Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             menuStrip1.SuspendLayout();
             panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
-            groupBox1.SuspendLayout();
-            panel4.SuspendLayout();
             panel3.SuspendLayout();
+            panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)numericUpDownTo).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDownFrom).BeginInit();
+            groupBox1.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
@@ -190,7 +193,7 @@
             // 
             // fileToolStripMenuItem
             // 
-            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { newToolStripMenuItem, downloadToolStripMenuItem, saveToolStripMenuItem });
+            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { newToolStripMenuItem, downloadToolStripMenuItem, saveToolStripMenuItem, importTestDataToolStripMenuItem });
             fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             fileToolStripMenuItem.Size = new Size(46, 24);
             fileToolStripMenuItem.Text = "File";
@@ -198,23 +201,30 @@
             // newToolStripMenuItem
             // 
             newToolStripMenuItem.Name = "newToolStripMenuItem";
-            newToolStripMenuItem.Size = new Size(161, 26);
+            newToolStripMenuItem.Size = new Size(203, 26);
             newToolStripMenuItem.Text = "New";
             newToolStripMenuItem.Click += newToolStripMenuItem_Click;
             // 
             // downloadToolStripMenuItem
             // 
             downloadToolStripMenuItem.Name = "downloadToolStripMenuItem";
-            downloadToolStripMenuItem.Size = new Size(161, 26);
+            downloadToolStripMenuItem.Size = new Size(203, 26);
             downloadToolStripMenuItem.Text = "Download";
             downloadToolStripMenuItem.Click += downloadToolStripMenuItem_Click;
             // 
             // saveToolStripMenuItem
             // 
             saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            saveToolStripMenuItem.Size = new Size(161, 26);
+            saveToolStripMenuItem.Size = new Size(203, 26);
             saveToolStripMenuItem.Text = "Save";
             saveToolStripMenuItem.Click += saveToolStripMenuItem_Click;
+            // 
+            // importTestDataToolStripMenuItem
+            // 
+            importTestDataToolStripMenuItem.Name = "importTestDataToolStripMenuItem";
+            importTestDataToolStripMenuItem.Size = new Size(203, 26);
+            importTestDataToolStripMenuItem.Text = "Import Test Data";
+            importTestDataToolStripMenuItem.Click += importTestDataToolStripMenuItem_Click;
             // 
             // contentToolStripMenuItem
             // 
@@ -267,10 +277,10 @@
             panel2.BackColor = SystemColors.ControlLightLight;
             panel2.Controls.Add(panel3);
             panel2.Controls.Add(panel4);
-            panel2.Controls.Add(comboBox2);
-            panel2.Controls.Add(comboBox1);
-            panel2.Controls.Add(numericUpDown2);
-            panel2.Controls.Add(numericUpDown1);
+            panel2.Controls.Add(comboBoxGenre);
+            panel2.Controls.Add(comboBoxType);
+            panel2.Controls.Add(numericUpDownTo);
+            panel2.Controls.Add(numericUpDownFrom);
             panel2.Controls.Add(groupBox1);
             panel2.Controls.Add(label6);
             panel2.Controls.Add(label5);
@@ -279,44 +289,125 @@
             panel2.Size = new Size(428, 215);
             panel2.TabIndex = 13;
             // 
-            // comboBox2
+            // panel3
             // 
-            comboBox2.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBox2.FormattingEnabled = true;
-            comboBox2.Items.AddRange(new object[] { "Action", "Adventure", "Comedy", "Crime", "Drama", "Historical", "Horror", "Mystery", "Romance", "Thriller", "Fantasy" });
-            comboBox2.Location = new Point(137, 84);
-            comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(133, 28);
-            comboBox2.TabIndex = 7;
+            panel3.BackColor = SystemColors.ControlLight;
+            panel3.Controls.Add(label4);
+            panel3.Controls.Add(label3);
+            panel3.Controls.Add(label2);
+            panel3.Controls.Add(label1);
+            panel3.Dock = DockStyle.Left;
+            panel3.Location = new Point(0, 0);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(125, 162);
+            panel3.TabIndex = 8;
             // 
-            // comboBox1
+            // label4
             // 
-            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Items.AddRange(new object[] { "Manga", "Manhwa", "Webtoon", "Comic book", "Manhua" });
-            comboBox1.Location = new Point(137, 48);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(133, 28);
-            comboBox1.TabIndex = 6;
+            label4.AutoSize = true;
+            label4.Location = new Point(12, 126);
+            label4.Name = "label4";
+            label4.Size = new Size(49, 20);
+            label4.TabIndex = 3;
+            label4.Text = "Status";
             // 
-            // numericUpDown2
+            // label3
             // 
-            numericUpDown2.Location = new Point(305, 12);
-            numericUpDown2.Maximum = new decimal(new int[] { 3000, 0, 0, 0 });
-            numericUpDown2.Name = "numericUpDown2";
-            numericUpDown2.Size = new Size(84, 27);
-            numericUpDown2.TabIndex = 5;
+            label3.AutoSize = true;
+            label3.Location = new Point(12, 84);
+            label3.Name = "label3";
+            label3.Size = new Size(48, 20);
+            label3.TabIndex = 2;
+            label3.Text = "Genre";
             // 
-            // numericUpDown1
+            // label2
             // 
-            numericUpDown1.Location = new Point(184, 12);
-            numericUpDown1.Maximum = new decimal(new int[] { 3000, 0, 0, 0 });
-            numericUpDown1.Name = "numericUpDown1";
-            numericUpDown1.Size = new Size(84, 27);
-            numericUpDown1.TabIndex = 4;
+            label2.AutoSize = true;
+            label2.Location = new Point(12, 48);
+            label2.Name = "label2";
+            label2.Size = new Size(40, 20);
+            label2.TabIndex = 1;
+            label2.Text = "Type";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(12, 12);
+            label1.Name = "label1";
+            label1.Size = new Size(101, 20);
+            label1.TabIndex = 0;
+            label1.Text = "Released Year";
+            // 
+            // panel4
+            // 
+            panel4.BackColor = SystemColors.ActiveCaption;
+            panel4.Controls.Add(buttonClear);
+            panel4.Controls.Add(buttonFilter);
+            panel4.Dock = DockStyle.Bottom;
+            panel4.Location = new Point(0, 162);
+            panel4.Name = "panel4";
+            panel4.Size = new Size(428, 53);
+            panel4.TabIndex = 4;
+            // 
+            // buttonClear
+            // 
+            buttonClear.Location = new Point(62, 12);
+            buttonClear.Name = "buttonClear";
+            buttonClear.Size = new Size(141, 27);
+            buttonClear.TabIndex = 1;
+            buttonClear.Text = "Clear Filter";
+            buttonClear.UseVisualStyleBackColor = true;
+            buttonClear.Click += buttonClear_Click;
+            // 
+            // buttonFilter
+            // 
+            buttonFilter.Location = new Point(230, 12);
+            buttonFilter.Name = "buttonFilter";
+            buttonFilter.Size = new Size(141, 27);
+            buttonFilter.TabIndex = 0;
+            buttonFilter.Text = "Filter";
+            buttonFilter.UseVisualStyleBackColor = true;
+            buttonFilter.Click += button1_Click;
+            // 
+            // comboBoxGenre
+            // 
+            comboBoxGenre.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxGenre.FormattingEnabled = true;
+            comboBoxGenre.Items.AddRange(new object[] { "Action", "Adventure", "Comedy", "Crime", "Drama", "Historical", "Horror", "Mystery", "Romance", "Thriller", "Fantasy" });
+            comboBoxGenre.Location = new Point(137, 84);
+            comboBoxGenre.Name = "comboBoxGenre";
+            comboBoxGenre.Size = new Size(133, 28);
+            comboBoxGenre.TabIndex = 7;
+            // 
+            // comboBoxType
+            // 
+            comboBoxType.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxType.FormattingEnabled = true;
+            comboBoxType.Items.AddRange(new object[] { "Manga", "Manhwa", "Webtoon", "Comic book", "Manhua" });
+            comboBoxType.Location = new Point(137, 48);
+            comboBoxType.Name = "comboBoxType";
+            comboBoxType.Size = new Size(133, 28);
+            comboBoxType.TabIndex = 6;
+            // 
+            // numericUpDownTo
+            // 
+            numericUpDownTo.Location = new Point(305, 12);
+            numericUpDownTo.Maximum = new decimal(new int[] { 3000, 0, 0, 0 });
+            numericUpDownTo.Name = "numericUpDownTo";
+            numericUpDownTo.Size = new Size(84, 27);
+            numericUpDownTo.TabIndex = 5;
+            // 
+            // numericUpDownFrom
+            // 
+            numericUpDownFrom.Location = new Point(184, 12);
+            numericUpDownFrom.Maximum = new decimal(new int[] { 3000, 0, 0, 0 });
+            numericUpDownFrom.Name = "numericUpDownFrom";
+            numericUpDownFrom.Size = new Size(84, 27);
+            numericUpDownFrom.TabIndex = 4;
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(radioButtonNone);
             groupBox1.Controls.Add(radioButton3);
             groupBox1.Controls.Add(radioButton2);
             groupBox1.Controls.Add(radioButton1);
@@ -325,6 +416,17 @@
             groupBox1.Size = new Size(286, 46);
             groupBox1.TabIndex = 3;
             groupBox1.TabStop = false;
+            // 
+            // radioButtonNone
+            // 
+            radioButtonNone.AutoSize = true;
+            radioButtonNone.Location = new Point(255, -14);
+            radioButtonNone.Name = "radioButtonNone";
+            radioButtonNone.Size = new Size(33, 24);
+            radioButtonNone.TabIndex = 3;
+            radioButtonNone.TabStop = true;
+            radioButtonNone.Text = ".";
+            radioButtonNone.UseVisualStyleBackColor = true;
             // 
             // radioButton3
             // 
@@ -377,74 +479,6 @@
             label5.TabIndex = 1;
             label5.Text = "from";
             // 
-            // panel4
-            // 
-            panel4.BackColor = SystemColors.ActiveCaption;
-            panel4.Controls.Add(button1);
-            panel4.Dock = DockStyle.Bottom;
-            panel4.Location = new Point(0, 162);
-            panel4.Name = "panel4";
-            panel4.Size = new Size(428, 53);
-            panel4.TabIndex = 4;
-            // 
-            // panel3
-            // 
-            panel3.BackColor = SystemColors.ControlLight;
-            panel3.Controls.Add(label4);
-            panel3.Controls.Add(label3);
-            panel3.Controls.Add(label2);
-            panel3.Controls.Add(label1);
-            panel3.Dock = DockStyle.Left;
-            panel3.Location = new Point(0, 0);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(125, 162);
-            panel3.TabIndex = 8;
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Location = new Point(12, 126);
-            label4.Name = "label4";
-            label4.Size = new Size(49, 20);
-            label4.TabIndex = 3;
-            label4.Text = "Status";
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new Point(12, 84);
-            label3.Name = "label3";
-            label3.Size = new Size(48, 20);
-            label3.TabIndex = 2;
-            label3.Text = "Genre";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(12, 48);
-            label2.Name = "label2";
-            label2.Size = new Size(40, 20);
-            label2.TabIndex = 1;
-            label2.Text = "Type";
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(12, 12);
-            label1.Name = "label1";
-            label1.Size = new Size(101, 20);
-            label1.TabIndex = 0;
-            label1.Text = "Released Year";
-            // 
-            // button1
-            // 
-            button1.Location = new Point(96, 13);
-            button1.Name = "button1";
-            button1.Size = new Size(239, 27);
-            button1.TabIndex = 0;
-            button1.Text = "Filter";
-            button1.UseVisualStyleBackColor = true;
-            // 
             // FormMainMenu
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -467,13 +501,13 @@
             menuStrip1.PerformLayout();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
-            groupBox1.ResumeLayout(false);
-            groupBox1.PerformLayout();
-            panel4.ResumeLayout(false);
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
+            panel4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)numericUpDownTo).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDownFrom).EndInit();
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -506,16 +540,19 @@
         private RadioButton radioButton1;
         private Label label6;
         private Label label5;
-        private NumericUpDown numericUpDown1;
-        private NumericUpDown numericUpDown2;
-        private ComboBox comboBox1;
-        private ComboBox comboBox2;
+        private NumericUpDown numericUpDownFrom;
+        private NumericUpDown numericUpDownTo;
+        private ComboBox comboBoxType;
+        private ComboBox comboBoxGenre;
         private Panel panel3;
         private Label label4;
         private Label label3;
         private Label label2;
         private Label label1;
         private Panel panel4;
-        private Button button1;
+        private Button buttonFilter;
+        private ToolStripMenuItem importTestDataToolStripMenuItem;
+        private Button buttonClear;
+        private RadioButton radioButtonNone;
     }
 }

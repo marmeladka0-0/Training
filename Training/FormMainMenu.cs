@@ -2,6 +2,7 @@
 using System.Drawing.Drawing2D;
 using System.Runtime.InteropServices;
 using MultiCOloredModernUI.Classes;
+using System.Windows.Forms;
 
 namespace Training
 {
@@ -27,6 +28,7 @@ namespace Training
             dataGridView1.Columns["comicId"].Visible = false;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             this.FormClosing += MainMenuClosing;
+            radioButtonNone.Visible = false;
             //label3.Text = library.comics[0].ToString();
         }
 
@@ -96,17 +98,18 @@ namespace Training
                 if (library.isComicSelected)
                 {
                     library = new Library();
-                    dataGridView1.DataSource = library.comics;
-                    dataGridView1.Columns["comicId"].Visible = false;
+                    library.isComicSelected = true;
+                    ChangeFields();
                 }
                 else
                 {
                     library = new Library();
                     library.isComicSelected = false;
-                    dataGridView1.DataSource = null;
-                    dataGridView1.DataSource = library.characters;
-                    dataGridView1.Columns["characterID"].Visible = false;
-                    dataGridView1.Columns["comicId"].Visible = false;
+                    ChangeFields();
+                    //dataGridView1.DataSource = null;
+                    //dataGridView1.DataSource = library.characters;
+                    //dataGridView1.Columns["characterID"].Visible = false;
+                    //dataGridView1.Columns["comicId"].Visible = false;
                     //dataGridView1.Columns["description"].Visible = false;
                 }
             }
@@ -216,6 +219,16 @@ namespace Training
         {
             if (library.isComicSelected)
             {
+                if (dataGridView1.SelectedRows.Count == 0)
+                {
+                    MessageBox.Show(
+                        "Please add new comic before.",
+                        "Information",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Question);
+                    return;
+                }
+
                 var result = MessageBox.Show(
                    "Are you sure you want to delete this comic?",
                    "Confirmation",
@@ -237,6 +250,16 @@ namespace Training
             }
             else
             {
+                if (dataGridView1.SelectedRows.Count == 0)
+                {
+                    MessageBox.Show(
+                        "Please add new character before.",
+                        "Information",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Question);
+                    return;
+                }
+
                 var result = MessageBox.Show(
                    "Are you sure you want to delete this character?",
                    "Confirmation",
@@ -303,8 +326,18 @@ namespace Training
             }
         }
 
-        private void buttonAddCharacter_Click(object sender, EventArgs e)
+        private void buttonAddCharacter_Click(object sender, EventArgs e)//ADD_CHARACTER
         {
+            if (dataGridView1.SelectedRows.Count == 0)
+            {
+                MessageBox.Show(
+                    "Please add new comic before.",
+                    "Information",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Question);
+                return;
+            }
+
             Comic selectedComic = (Comic)dataGridView1.SelectedRows[0].DataBoundItem;
             FormAddCharacter form = new FormAddCharacter(selectedComic);
             form.ShowDialog();
@@ -330,7 +363,7 @@ namespace Training
             }
         }
 
-        public void MainMenuClosing(object sender, FormClosingEventArgs e)
+        public void MainMenuClosing(object sender, FormClosingEventArgs e)//IS_ALL_SAVED
         {
             var result = MessageBox.Show(
                "Do you want to save your data before.\n All unsaved data will be lost.",
@@ -349,5 +382,74 @@ namespace Training
             }
         }
 
+        private void importTestDataToolStripMenuItem_Click(object sender, EventArgs e)//TEST_DATA
+        {
+            library.FillWithTestData();
+        }
+
+        private void button1_Click(object sender, EventArgs e)//FILTER_COMICS
+        {
+            List<Comic> newComicList = new List<Comic>();
+            List<Comic> ComicListBefore = library.selectedComics;
+
+            if (ComicListBefore.Count == 0)
+            {
+                ComicListBefore = library.comics;
+            }
+
+            int? fromYear = null;
+            int? toYear = null;
+            string? type = null;
+            string? genre = null;
+            string? status = null;
+
+            if (numericUpDownFrom.Value != 0)
+            {
+                fromYear = Convert.ToInt32(numericUpDownFrom.Value);
+            }
+            if (numericUpDownTo.Value != 0)
+            {
+                toYear = Convert.ToInt32(numericUpDownTo.Value);
+            }
+            if (comboBoxType.Text != "")
+            {
+                type = comboBoxType.Text;
+            }
+            if (comboBoxGenre.Text != "")
+            {
+                genre = comboBoxGenre.Text;
+            }
+
+            if (radioButton1.Checked)
+                status = radioButton1.Text;
+            else if (radioButton2.Checked)
+                status = radioButton2.Text;
+            else if (radioButton3.Checked)
+                status = radioButton3.Text;
+
+            foreach (Comic item in ComicListBefore)
+            {
+                bool checker = true;
+                if (fromYear != null && fromYear > item.releaseYear) { checker = false; }
+                if (toYear != null && toYear < item.releaseYear) { checker = false; }
+                if (type != null && type.ToLower() != item.type) { checker = false; }
+                if (genre != null && genre.ToLower() != item.genre) { checker = false; }
+                if (status != null && status != item.status) { checker = false; }
+                if (checker == true) { newComicList.Add(item); }
+            }
+
+            dataGridView1.DataSource = newComicList;
+
+        }
+
+        private void buttonClear_Click(object sender, EventArgs e)
+        {
+            numericUpDownFrom.Value = 0;
+            numericUpDownTo.Value = 0;
+
+            comboBoxType.SelectedIndex = -1;
+            comboBoxGenre.SelectedIndex = -1;
+            radioButtonNone.Checked = true;
+        }
     }
 }
