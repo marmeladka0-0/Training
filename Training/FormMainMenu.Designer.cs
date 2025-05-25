@@ -52,6 +52,7 @@
             aboutToolStripMenuItem = new ToolStripMenuItem();
             comboBoxSearchBy = new ComboBox();
             panel2 = new Panel();
+            panel5 = new Panel();
             label8 = new Label();
             label7 = new Label();
             panel3 = new Panel();
@@ -74,17 +75,16 @@
             radioButton1 = new RadioButton();
             label6 = new Label();
             label5 = new Label();
-            panel5 = new Panel();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             menuStrip1.SuspendLayout();
             panel2.SuspendLayout();
+            panel5.SuspendLayout();
             panel3.SuspendLayout();
             panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDownTo).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownFrom).BeginInit();
             groupBox1.SuspendLayout();
-            panel5.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
@@ -143,6 +143,7 @@
             buttonDetails.TabIndex = 3;
             buttonDetails.Text = "See More Details";
             buttonDetails.UseVisualStyleBackColor = true;
+            buttonDetails.Click += buttonDetails_Click;
             // 
             // buttonEditComic
             // 
@@ -286,8 +287,9 @@
             // aboutToolStripMenuItem
             // 
             aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            aboutToolStripMenuItem.Size = new Size(133, 26);
+            aboutToolStripMenuItem.Size = new Size(224, 26);
             aboutToolStripMenuItem.Text = "About";
+            aboutToolStripMenuItem.Click += aboutToolStripMenuItem_Click;
             // 
             // comboBoxSearchBy
             // 
@@ -314,10 +316,20 @@
             panel2.Controls.Add(groupBox1);
             panel2.Controls.Add(label6);
             panel2.Controls.Add(label5);
-            panel2.Location = new Point(224, 84);
+            panel2.Location = new Point(411, 82);
             panel2.Name = "panel2";
             panel2.Size = new Size(428, 215);
             panel2.TabIndex = 13;
+            // 
+            // panel5
+            // 
+            panel5.BackColor = SystemColors.ControlLight;
+            panel5.Controls.Add(label8);
+            panel5.Controls.Add(label7);
+            panel5.Location = new Point(275, 49);
+            panel5.Name = "panel5";
+            panel5.Size = new Size(138, 62);
+            panel5.TabIndex = 16;
             // 
             // label8
             // 
@@ -443,7 +455,7 @@
             comboBoxType.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxType.FormattingEnabled = true;
             comboBoxType.Items.AddRange(new object[] { "Manga", "Manhwa", "Webtoon", "Comic book", "Manhua" });
-            comboBoxType.Location = new Point(137, 48);
+            comboBoxType.Location = new Point(137, 50);
             comboBoxType.Name = "comboBoxType";
             comboBoxType.Size = new Size(133, 28);
             comboBoxType.TabIndex = 6;
@@ -538,16 +550,6 @@
             label5.TabIndex = 1;
             label5.Text = "from";
             // 
-            // panel5
-            // 
-            panel5.BackColor = SystemColors.ControlLight;
-            panel5.Controls.Add(label8);
-            panel5.Controls.Add(label7);
-            panel5.Location = new Point(275, 49);
-            panel5.Name = "panel5";
-            panel5.Size = new Size(138, 62);
-            panel5.TabIndex = 16;
-            // 
             // FormMainMenu
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -570,6 +572,8 @@
             menuStrip1.PerformLayout();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
+            panel5.ResumeLayout(false);
+            panel5.PerformLayout();
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
             panel4.ResumeLayout(false);
@@ -577,8 +581,6 @@
             ((System.ComponentModel.ISupportInitialize)numericUpDownFrom).EndInit();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
-            panel5.ResumeLayout(false);
-            panel5.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }

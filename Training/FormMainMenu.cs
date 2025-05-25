@@ -13,6 +13,7 @@ namespace Training
         Library library = new Library();
 
 
+
         public FormMainMenu()//CONSTRUCTOR
         {
             // робить кнопку невидимою
@@ -42,30 +43,6 @@ namespace Training
             label8.Text = "";
             //label3.Text = library.comics[0].ToString();
         }
-
-        //private void button1_Click(object sender, EventArgs e)
-        //{
-        //    textBox2.Clear();
-        //    int n = Convert.ToInt32(textBox1.Text);
-        //    matrix = new int[n];
-        //    Random rand = new Random();
-        //    for (int i = 0; i < n; i++)
-        //    {
-        //        matrix[i] = rand.Next(100);
-        //        textBox2.Text += matrix[i] + "  ";
-        //    }
-
-        //}
-
-        //private void button2_Click(object sender, EventArgs e)
-        //{
-        //    int minIdx = 0;
-        //    for (int i = 1; i < matrix.Length; i++)
-        //        if (matrix[minIdx] > matrix[i])
-        //            minIdx = i;
-        //    label2.Text = " Мінімальне значення " +
-        //        matrix[minIdx] + "(номер " + minIdx + ")";
-        //}
 
         private void btnSearch_Click(object sender, EventArgs e)//SEARCH
         {
@@ -166,6 +143,7 @@ namespace Training
             library.isComicSelected = false;
             ChangeFields();
         }
+        
         private void ChangeFields()//SW_HELP_F
         {
             comboBoxSearchBy.Items.Clear();
@@ -432,6 +410,8 @@ namespace Training
         private void importTestDataToolStripMenuItem_Click(object sender, EventArgs e)//TEST_DATA
         {
             library.FillWithTestData();
+            dataGridView1.DataSource = null;
+            ChangeFields();
         }
 
         private void button1_Click(object sender, EventArgs e)//FILTER
@@ -488,7 +468,8 @@ namespace Training
                 }
 
                 dataGridView1.DataSource = newComicList;
-            } else
+            }
+            else
             {
                 List<Character> newComicList = new List<Character>();
                 List<Character> ComicListBefore = library.selectedCharacters;
@@ -535,11 +516,11 @@ namespace Training
 
                 dataGridView1.DataSource = newComicList;
             }
-            
+
 
         }
 
-        private void buttonClear_Click(object sender, EventArgs e)
+        private void buttonClear_Click(object sender, EventArgs e)//CLEAR_FILTER
         {
             if (library.isComicSelected)
             {
@@ -553,11 +534,13 @@ namespace Training
                 if (library.selectedComics.Count == 0)
                 {
                     dataGridView1.DataSource = library.comics;
-                } else
+                }
+                else
                 {
                     dataGridView1.DataSource = library.selectedComics;
                 }
-            } else
+            }
+            else
             {
                 numericUpDownFrom.Value = 0;
                 numericUpDownTo.Value = 0;
@@ -578,10 +561,10 @@ namespace Training
                     dataGridView1.DataSource = library.selectedCharacters;
                 }
             }
-            
+
         }
 
-        private void buttonSC_Click(object sender, EventArgs e)
+        private void buttonSC_Click(object sender, EventArgs e)//ADD_SELECTED_COMIC
         {
             if (dataGridView1.SelectedRows.Count == 0)
             {
@@ -614,7 +597,7 @@ namespace Training
             menuStrip1.Visible = false;
         }
 
-        private void buttonSelect_Click(object sender, EventArgs e)
+        private void buttonSelect_Click(object sender, EventArgs e)//SELECT_COMIC
         {
             library.selectedC = (Comic)dataGridView1.SelectedRows[0].DataBoundItem;
             buttonSelect.Enabled = false;
@@ -641,7 +624,7 @@ namespace Training
             menuStrip1.Visible = true;
         }
 
-        private void buttonCancel_Click(object sender, EventArgs e)
+        private void buttonCancel_Click(object sender, EventArgs e)//CANCEL_SELECTING_COMIC
         {
             buttonSelect.Enabled = false;
             buttonSelect.Visible = false;
@@ -662,6 +645,72 @@ namespace Training
             menuStrip1.Enabled = true;
             menuStrip1.Visible = true;
             ChangeFields();
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)//ABOUT
+        {
+            string message = "Program: ComicCatalog\n" +
+                     "Version: 1.0.0\n" +
+                     "Developer: Mariia Mazurova\n" +
+                     "Group: PZPI-24-1\n" +
+                     "Description: Application for managing comics collections.\n" +
+                     "\nFeatures:\n" +
+                     "- Add and manage comics\n" +
+                     "- Track characters\n" +
+                     "- Filter by different parameters\n" +
+                     "- Designed for developers, artists and hobby collectors";
+
+            MessageBox.Show(message, "About", MessageBoxButtons.OK, MessageBoxIcon.Question);
+        }
+
+        private void buttonDetails_Click(object sender, EventArgs e)//DETAILS
+        {
+            if (library.isComicSelected)
+            {
+                if (dataGridView1.SelectedRows.Count == 0)
+                {
+                    MessageBox.Show(
+                        "Please add new comic before.",
+                        "Information",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Question);
+                    return;
+                }
+
+                Comic selectedComic = (Comic)dataGridView1.SelectedRows[0].DataBoundItem;
+
+                string message = $"Comic ID: {selectedComic.comicID}\n" +
+                 $"Title: {selectedComic.title}\n" +
+                 $"Author: {selectedComic.author}\n" +
+                 $"Release Year: {selectedComic.releaseYear}\n" +
+                 $"Type: {selectedComic.type}\n" +
+                 $"Genre: {selectedComic.genre}\n" +
+                 $"Status: {selectedComic.status}";
+                MessageBox.Show(message, "Details about comic", MessageBoxButtons.OK, MessageBoxIcon.Question);
+            } else
+            {
+                if (dataGridView1.SelectedRows.Count == 0)
+                {
+                    MessageBox.Show(
+                        "Please add new character before.",
+                        "Information",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Question);
+                    return;
+                }
+
+                Character selectedCharacter = (Character)dataGridView1.SelectedRows[0].DataBoundItem;
+
+                string message = $"Character ID: {selectedCharacter.characterID}\n" +
+                 $"Name: {selectedCharacter.name}\n" +
+                 $"Description: {selectedCharacter.description}\n" +
+                 $"Age: {selectedCharacter.age}\n" +
+                 $"Gender: {selectedCharacter.gender}\n" +
+                 $"Status: {selectedCharacter.status}\n" +
+                 $"Comic ID: {selectedCharacter.comicID}";
+                MessageBox.Show(message, "Details about character", MessageBoxButtons.OK, MessageBoxIcon.Question);
+            }
+            
         }
     }
 }
