@@ -69,6 +69,9 @@ namespace MultiCOloredModernUI
             this.Height = 362;
             panel1.Height = 78;
 
+            selectedComic = new Comic();
+            selectedComic.comicID = selectedCharacter.comicID;
+
             labelComicTitle.Text = selectedCharacter.comicID.ToString(); //FIX
 
             textBoxName.Text = selectedCharacter.name;

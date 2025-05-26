@@ -287,7 +287,7 @@
             // aboutToolStripMenuItem
             // 
             aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            aboutToolStripMenuItem.Size = new Size(224, 26);
+            aboutToolStripMenuItem.Size = new Size(133, 26);
             aboutToolStripMenuItem.Text = "About";
             aboutToolStripMenuItem.Click += aboutToolStripMenuItem_Click;
             // 
@@ -297,7 +297,7 @@
             comboBoxSearchBy.DisplayMember = "(none)";
             comboBoxSearchBy.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxSearchBy.FormattingEnabled = true;
-            comboBoxSearchBy.Items.AddRange(new object[] { "Title", "Author", "ReleaseYear", "Type", "Genre", "Status" });
+            comboBoxSearchBy.Items.AddRange(new object[] { "Title", "Author" });
             comboBoxSearchBy.Location = new Point(810, 36);
             comboBoxSearchBy.Name = "comboBoxSearchBy";
             comboBoxSearchBy.Size = new Size(151, 28);

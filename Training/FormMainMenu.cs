@@ -153,7 +153,7 @@ namespace Training
             if (library.isComicSelected)
             {
                 comboBoxSearchBy.Items.AddRange(new string[] {
-                    "Title", "Author", "ReleaseYear", "Type", "Genre", "Status"
+                    "Title", "Author"
                     });
                 dataGridView1.DataSource = library.comics;
                 dataGridView1.Columns["comicId"].Visible = false;
@@ -181,7 +181,7 @@ namespace Training
             else
             {
                 comboBoxSearchBy.Items.AddRange(new string[] {
-                     "Name", "Description", "Age", "Gender", "Status"
+                     "Name", "Description"
                      });
                 dataGridView1.DataSource = library.characters;
                 dataGridView1.Columns["characterId"].Visible = false;
@@ -561,7 +561,7 @@ namespace Training
                     dataGridView1.DataSource = library.selectedCharacters;
                 }
             }
-
+            btnSearch.PerformClick();
         }
 
         private void buttonSC_Click(object sender, EventArgs e)//ADD_SELECTED_COMIC
