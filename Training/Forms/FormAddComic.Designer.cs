@@ -32,6 +32,7 @@
             buttonCancelAddComic = new Button();
             buttonSaveComic = new Button();
             panel2 = new Panel();
+            labelCover = new Label();
             labelStatus = new Label();
             labelGenre = new Label();
             labelType = new Label();
@@ -44,6 +45,8 @@
             comboBoxType = new ComboBox();
             comboBoxGenre = new ComboBox();
             comboBoxStatus = new ComboBox();
+            buttonAddImage = new Button();
+            labelIsSelected = new Label();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDownYear).BeginInit();
@@ -55,7 +58,7 @@
             panel1.Controls.Add(buttonCancelAddComic);
             panel1.Controls.Add(buttonSaveComic);
             panel1.Dock = DockStyle.Bottom;
-            panel1.Location = new Point(0, 231);
+            panel1.Location = new Point(0, 267);
             panel1.Name = "panel1";
             panel1.Size = new Size(482, 86);
             panel1.TabIndex = 0;
@@ -85,6 +88,7 @@
             // panel2
             // 
             panel2.BackColor = SystemColors.ControlLight;
+            panel2.Controls.Add(labelCover);
             panel2.Controls.Add(labelStatus);
             panel2.Controls.Add(labelGenre);
             panel2.Controls.Add(labelType);
@@ -94,8 +98,17 @@
             panel2.Dock = DockStyle.Left;
             panel2.Location = new Point(0, 0);
             panel2.Name = "panel2";
-            panel2.Size = new Size(144, 231);
+            panel2.Size = new Size(144, 267);
             panel2.TabIndex = 1;
+            // 
+            // labelCover
+            // 
+            labelCover.AutoSize = true;
+            labelCover.Location = new Point(12, 228);
+            labelCover.Name = "labelCover";
+            labelCover.Size = new Size(89, 20);
+            labelCover.TabIndex = 6;
+            labelCover.Text = "ComicCover";
             // 
             // labelStatus
             // 
@@ -216,11 +229,31 @@
             comboBoxStatus.Size = new Size(312, 28);
             comboBoxStatus.TabIndex = 7;
             // 
+            // buttonAddImage
+            // 
+            buttonAddImage.Location = new Point(156, 228);
+            buttonAddImage.Name = "buttonAddImage";
+            buttonAddImage.Size = new Size(146, 27);
+            buttonAddImage.TabIndex = 8;
+            buttonAddImage.Text = "Add Cover";
+            buttonAddImage.UseVisualStyleBackColor = true;
+            buttonAddImage.Click += buttonAddImage_Click;
+            // 
+            // labelIsSelected
+            // 
+            labelIsSelected.AutoSize = true;
+            labelIsSelected.Location = new Point(315, 232);
+            labelIsSelected.Name = "labelIsSelected";
+            labelIsSelected.Size = new Size(0, 20);
+            labelIsSelected.TabIndex = 9;
+            // 
             // FormAddComic
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(482, 317);
+            ClientSize = new Size(482, 353);
+            Controls.Add(labelIsSelected);
+            Controls.Add(buttonAddImage);
             Controls.Add(comboBoxStatus);
             Controls.Add(comboBoxGenre);
             Controls.Add(comboBoxType);
@@ -258,5 +291,8 @@
         private ComboBox comboBoxType;
         private ComboBox comboBoxGenre;
         private ComboBox comboBoxStatus;
+        private Button buttonAddImage;
+        private Label labelCover;
+        private Label labelIsSelected;
     }
 }

@@ -15,7 +15,10 @@ namespace MultiCOloredModernUI.Classes
         public string type { get; set; }
         public string genre { get; set; }
         public string status { get; set; }
-        public Character[]? characters { get; set; }
+        public Image? comicCover { get; set; }
+        public string? coverPath { get; set; }
+
+        //public Character[]? characters { get; set; }
 
         public string ToString()
         {
@@ -27,7 +30,10 @@ namespace MultiCOloredModernUI.Classes
             comicInfo += type + "|";
             comicInfo += genre + "|";
             comicInfo += status + "|";
-            if (characters == null)
+            if (coverPath != null)
+            {
+                comicInfo += coverPath;
+            } else
             {
                 comicInfo += "-";
             }

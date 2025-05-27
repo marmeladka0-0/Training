@@ -154,6 +154,11 @@ namespace MultiCOloredModernUI.Classes
                 newComic.type = addinfo[4];
                 newComic.genre = addinfo[5];
                 newComic.status = addinfo[6];
+                if (addinfo[7] != "-")
+                {
+                    newComic.coverPath = addinfo[7];
+                    newComic.comicCover = Image.FromFile(addinfo[7]);
+                }
                 comics.Add(newComic);
             }
             while ((line = reader.ReadLine()) != null)

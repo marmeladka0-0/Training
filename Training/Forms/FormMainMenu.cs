@@ -5,6 +5,7 @@ using MultiCOloredModernUI.Classes;
 using System.Windows.Forms;
 using System;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using MultiCOloredModernUI.Forms;
 
 namespace Training
 {
@@ -29,6 +30,8 @@ namespace Training
 
             dataGridView1.DataSource = library.comics;
             dataGridView1.Columns["comicId"].Visible = false;
+            dataGridView1.Columns["comicCover"].Visible = false;
+            dataGridView1.Columns["coverPath"].Visible = false;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             this.FormClosing += MainMenuClosing;
             radioButtonNone.Visible = false;
@@ -63,6 +66,7 @@ namespace Training
             {
                 dataGridView1.DataSource = library.SearchComics(s, selectedField);
                 dataGridView1.Columns["comicId"].Visible = false;
+                dataGridView1.Columns["comicCover"].Visible = false;
                 buttonFilter.PerformClick();
             }
             else
@@ -115,6 +119,9 @@ namespace Training
                 dataGridView1.DataSource = null;
                 dataGridView1.DataSource = library.comics;
                 dataGridView1.Columns["comicId"].Visible = false;
+                dataGridView1.Columns["comicCover"].Visible = false;
+                dataGridView1.Columns["coverPath"].Visible = false;
+
             }
             else
             {
@@ -157,6 +164,8 @@ namespace Training
                     });
                 dataGridView1.DataSource = library.comics;
                 dataGridView1.Columns["comicId"].Visible = false;
+                dataGridView1.Columns["comicCover"].Visible = false;
+                dataGridView1.Columns["coverPath"].Visible = false;
                 buttonAddCharacter.Enabled = true;
                 buttonAddCharacter.Visible = true;
                 label1.Text = "Released Year";
@@ -225,6 +234,8 @@ namespace Training
                 dataGridView1.DataSource = null;
                 dataGridView1.DataSource = library.comics;
                 dataGridView1.Columns["comicId"].Visible = false;
+                dataGridView1.Columns["comicCover"].Visible = false;
+                dataGridView1.Columns["coverPath"].Visible = false;
             }
             else
             {
@@ -271,6 +282,8 @@ namespace Training
                     dataGridView1.DataSource = null;
                     dataGridView1.DataSource = library.comics;
                     dataGridView1.Columns["comicID"].Visible = false;
+                    dataGridView1.Columns["comicCover"].Visible = false;
+                    dataGridView1.Columns["coverPath"].Visible = false;
                 }
             }
             else
@@ -329,6 +342,8 @@ namespace Training
                 dataGridView1.DataSource = null;
                 dataGridView1.DataSource = library.comics;
                 dataGridView1.Columns["comicID"].Visible = false;
+                dataGridView1.Columns["comicCover"].Visible = false;
+                dataGridView1.Columns["coverPath"].Visible = false;
             }
             else
             {
@@ -678,16 +693,21 @@ namespace Training
                 }
 
                 Comic selectedComic = (Comic)dataGridView1.SelectedRows[0].DataBoundItem;
+                FormComicInfo form = new FormComicInfo(selectedComic, library.characters);
+                form.ShowDialog();
 
-                string message = $"Comic ID: {selectedComic.comicID}\n" +
-                 $"Title: {selectedComic.title}\n" +
-                 $"Author: {selectedComic.author}\n" +
-                 $"Release Year: {selectedComic.releaseYear}\n" +
-                 $"Type: {selectedComic.type}\n" +
-                 $"Genre: {selectedComic.genre}\n" +
-                 $"Status: {selectedComic.status}";
-                MessageBox.Show(message, "Details about comic", MessageBoxButtons.OK, MessageBoxIcon.Question);
-            } else
+                //Comic selectedComic = (Comic)dataGridView1.SelectedRows[0].DataBoundItem;
+
+                //string message = $"Comic ID: {selectedComic.comicID}\n" +
+                // $"Title: {selectedComic.title}\n" +
+                // $"Author: {selectedComic.author}\n" +
+                // $"Release Year: {selectedComic.releaseYear}\n" +
+                // $"Type: {selectedComic.type}\n" +
+                // $"Genre: {selectedComic.genre}\n" +
+                // $"Status: {selectedComic.status}";
+                //MessageBox.Show(message, "Details about comic", MessageBoxButtons.OK, MessageBoxIcon.Question);
+            }
+            else
             {
                 if (dataGridView1.SelectedRows.Count == 0)
                 {

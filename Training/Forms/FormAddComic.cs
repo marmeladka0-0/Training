@@ -15,6 +15,8 @@ namespace MultiCOloredModernUI
     public partial class FormAddComic : Form
     {
         public Comic? NewComic { get; set; }
+        public Image Cover { get; set; }
+        public string Path { get; set; }
 
         public FormAddComic()
         {
@@ -54,7 +56,9 @@ namespace MultiCOloredModernUI
             NewComic.type = comboBoxType.SelectedItem.ToString().ToLower();
             NewComic.genre = comboBoxGenre.SelectedItem.ToString().ToLower();
             NewComic.status = comboBoxStatus.SelectedItem.ToString();
-            
+            NewComic.comicCover = Cover;
+            NewComic.coverPath = Path;
+
             this.Close();
         }
 
@@ -68,9 +72,61 @@ namespace MultiCOloredModernUI
             comboBoxType.SelectedItem = char.ToUpper(comicToEdit.type[0]) + comicToEdit.type.Substring(1);
             comboBoxGenre.SelectedItem = char.ToUpper(comicToEdit.genre[0]) + comicToEdit.genre.Substring(1);
             comboBoxStatus.SelectedItem = comicToEdit.status;
+            if (comicToEdit.comicCover != null) {labelIsSelected.Text = "Cover is selected";}
 
             NewComic = comicToEdit;
         }
 
+        private void buttonAddImage_Click(object sender, EventArgs e)//IN_PROCESS
+        {
+            string filePath = "";
+
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.InitialDirectory = "c:\\";
+                openFileDialog.Filter = "Image files (*.png;*.jpg;*.jpeg)|*.png;*.jpg;*.jpeg|All files (*.*)|*.*";
+                /*
+                    Первая часть — "Image files..." — описаниe
+                    Вторая часть — "*.png;*.jpg;*.jpeg" — разрешённые расширения.
+                    Вторая строка — опция показать все файлы 
+                */
+
+                openFileDialog.FilterIndex = 1;
+                /*По умолчанию выбран первый фильтр
+                  — т.е. показывать только изображения (*.png, *.jpg, *.jpeg).*/
+
+                openFileDialog.RestoreDirectory = true;
+                /*После закрытия диалога возвращает пользователя в ту папку,
+                  откуда он запускал приложение.*/
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    filePath = openFileDialog.FileName;
+
+                    // Отобразим изображение в отдельной форме
+                    Image image = Image.FromFile(filePath);
+                    Form imageForm = new Form
+                    {
+                        Text = "Selected Image",
+                        Size = new Size(600, 600)
+                    };
+
+                    PictureBox pictureBox = new PictureBox
+                    {
+                        Dock = DockStyle.Fill, //заполняет всё окно.
+                        Image = image, //показывает загруженное изображение.
+                        SizeMode = PictureBoxSizeMode.Zoom //масштабирует изображение
+                    };
+
+                    imageForm.Controls.Add(pictureBox);
+                    imageForm.ShowDialog();
+
+                    Cover = image;
+                    Path = filePath;
+                    labelIsSelected.Text = "Cover is selected";
+                }
+
+            }
+        }
     }
 }
