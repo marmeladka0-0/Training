@@ -186,6 +186,7 @@ namespace Training
                 label7.Text = "";
                 label8.Text = "";
                 library.selectedC = null;
+                textBox3.Text = "";
             }
             else
             {
@@ -211,6 +212,7 @@ namespace Training
                 groupBox1.Visible = false;
                 buttonSC.Enabled = true;
                 buttonSC.Visible = true;
+                textBox3.Text = "";
                 //dataGridView1.Columns["description"].Visible = false;
             }
 
