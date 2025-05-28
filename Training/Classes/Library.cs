@@ -80,6 +80,8 @@ namespace MultiCOloredModernUI.Classes
                 newCharacter.comicID = Convert.ToInt32(addinfo[6]);
                 characters.Add(newCharacter);
             }
+
+            reader.Close();
         }
 
 
