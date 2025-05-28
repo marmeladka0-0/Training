@@ -14,10 +14,17 @@ namespace MultiCOloredModernUI
 {
     public partial class FormAddCharacter : Form
     {
+        //Temporary variable for selected comic
         Comic selectedComic;
+
+        //Temporary variable for a new character
         public Character? NewCharacter { get; set; }
 
+        //Temporary variable for understand what user want to see after adding
         public bool OpenCharacters = false;
+
+
+        //Constructor to add character
         public FormAddCharacter(Comic SelectedComic)
         {
             InitializeComponent();
@@ -25,16 +32,20 @@ namespace MultiCOloredModernUI
             labelComicTitle.Text = selectedComic.title;
         }
 
+
+        //To close the form
         private void buttonCancel_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
+        //To add a new character to comic
         private void buttonSave_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(textBoxName.Text) ||
                 string.IsNullOrWhiteSpace(textBoxDescription.Text) ||
                 comboBoxGender.SelectedItem == null ||
+                comboBoxStatus.SelectedItem == null ||
                 numericUpDownAge.Value == 0)
             {
                 MessageBox.Show(
@@ -60,6 +71,9 @@ namespace MultiCOloredModernUI
             this.Close();
 
         }
+
+
+        //Constructor to edit character
         public FormAddCharacter(Character selectedCharacter)
         {
             InitializeComponent();
@@ -72,7 +86,7 @@ namespace MultiCOloredModernUI
             selectedComic = new Comic();
             selectedComic.comicID = selectedCharacter.comicID;
 
-            labelComicTitle.Text = selectedCharacter.comicID.ToString(); //FIX
+            labelComicTitle.Text = selectedCharacter.comicID.ToString();
 
             textBoxName.Text = selectedCharacter.name;
             textBoxDescription.Text = selectedCharacter.description;
@@ -80,10 +94,12 @@ namespace MultiCOloredModernUI
             comboBoxStatus.SelectedItem = selectedCharacter.status.ToString();
             if (selectedCharacter.gender.ToString() == "M")
             {
-                comboBoxGender.SelectedItem = selectedCharacter.gender.ToString() + " - Male";
+                comboBoxGender.SelectedItem = selectedCharacter.gender
+                                              .ToString() + " - Male";
             } else
             {
-                comboBoxGender.SelectedItem = selectedCharacter.gender.ToString() + " - Female";
+                comboBoxGender.SelectedItem = selectedCharacter.gender
+                                              .ToString() + " - Female";
             }
             
 

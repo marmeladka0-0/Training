@@ -14,10 +14,18 @@ namespace MultiCOloredModernUI
 {
     public partial class FormAddComic : Form
     {
+        //Temporary variable for a new comic
         public Comic? NewComic { get; set; }
-        public Image Cover { get; set; }
-        public string Path { get; set; }
 
+        //Temporary variable for a comic cover
+        public Image? Cover { get; set; }
+
+        //Temporary variable for a path for a comic cover
+        public string? Path { get; set; }
+
+
+
+        //Constructor of the Add form
         public FormAddComic()
         {
             InitializeComponent();
@@ -56,12 +64,17 @@ namespace MultiCOloredModernUI
             NewComic.type = comboBoxType.SelectedItem.ToString().ToLower();
             NewComic.genre = comboBoxGenre.SelectedItem.ToString().ToLower();
             NewComic.status = comboBoxStatus.SelectedItem.ToString();
-            NewComic.comicCover = Cover;
-            NewComic.coverPath = Path;
+            if (Cover != null)
+            {
+                NewComic.comicCover = Cover;
+                NewComic.coverPath = Path;
+            }
 
             this.Close();
         }
 
+
+        //Constructor of the Edit form
         public FormAddComic(Comic comicToEdit) : this()
         {
             this.Text = "EditComic";
@@ -69,41 +82,35 @@ namespace MultiCOloredModernUI
             textBoxTitle.Text = comicToEdit.title;
             textBoxAuthor.Text = comicToEdit.author;
             numericUpDownYear.Value = comicToEdit.releaseYear;
-            comboBoxType.SelectedItem = char.ToUpper(comicToEdit.type[0]) + comicToEdit.type.Substring(1);
-            comboBoxGenre.SelectedItem = char.ToUpper(comicToEdit.genre[0]) + comicToEdit.genre.Substring(1);
+            comboBoxType.SelectedItem = char.ToUpper(comicToEdit.type[0]) +
+                                        comicToEdit.type.Substring(1);
+            comboBoxGenre.SelectedItem = char.ToUpper(comicToEdit.genre[0]) +
+                                         comicToEdit.genre.Substring(1);
             comboBoxStatus.SelectedItem = comicToEdit.status;
-            if (comicToEdit.comicCover != null) {labelIsSelected.Text = "Cover is selected";}
+            if (comicToEdit.comicCover != null) 
+                labelIsSelected.Text = "Cover is selected";
 
             NewComic = comicToEdit;
         }
 
-        private void buttonAddImage_Click(object sender, EventArgs e)//IN_PROCESS
+        //Function to add image to comic
+        private void buttonAddImage_Click(object sender, EventArgs e)//ADD_IMG
         {
             string filePath = "";
 
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
                 openFileDialog.InitialDirectory = "c:\\";
-                openFileDialog.Filter = "Image files (*.png;*.jpg;*.jpeg)|*.png;*.jpg;*.jpeg|All files (*.*)|*.*";
-                /*
-                    Первая часть — "Image files..." — описаниe
-                    Вторая часть — "*.png;*.jpg;*.jpeg" — разрешённые расширения.
-                    Вторая строка — опция показать все файлы 
-                */
-
+                openFileDialog.Filter = "Image files (*.png;*.jpg;*.jpeg)|" +
+                                        "*.png;*.jpg;*.jpeg|" +
+                                        "All files (*.*)|*.*";
                 openFileDialog.FilterIndex = 1;
-                /*По умолчанию выбран первый фильтр
-                  — т.е. показывать только изображения (*.png, *.jpg, *.jpeg).*/
-
                 openFileDialog.RestoreDirectory = true;
-                /*После закрытия диалога возвращает пользователя в ту папку,
-                  откуда он запускал приложение.*/
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     filePath = openFileDialog.FileName;
 
-                    // Отобразим изображение в отдельной форме
                     Image image = Image.FromFile(filePath);
                     Form imageForm = new Form
                     {
@@ -113,9 +120,9 @@ namespace MultiCOloredModernUI
 
                     PictureBox pictureBox = new PictureBox
                     {
-                        Dock = DockStyle.Fill, //заполняет всё окно.
-                        Image = image, //показывает загруженное изображение.
-                        SizeMode = PictureBoxSizeMode.Zoom //масштабирует изображение
+                        Dock = DockStyle.Fill,
+                        Image = image,
+                        SizeMode = PictureBoxSizeMode.Zoom
                     };
 
                     imageForm.Controls.Add(pictureBox);

@@ -9,25 +9,18 @@ namespace MultiCOloredModernUI.Classes
 {
     public class Character
     {
+        //Parametrs of character
         public int characterID { get; set; }
-        public string name { get; set; }
-        public string? description { get; set; }
+        public string name { get; set; } = "";
+        public string description { get; set; } = "";
         public ushort age { get; set; }
         public char gender { get; set; }
-        public string status { get; set; }
+        public string status { get; set; } = "";
         public int comicID { get; set; }
 
-        //public void GetInfo()
-        //{
-        //    Console.WriteLine("======================");
-        //    Console.WriteLine("Name:" + name);
-        //    Console.WriteLine("About:" + description);
-        //    Console.WriteLine("Age:" + age);
-        //    Console.WriteLine("Gender:" + gender);
-        //    Console.WriteLine("======================");
-        //}
 
-        public string ToString()
+        //Return character as a string
+        public string CharacterToString()
         {
             string characterInfo = "";
             characterInfo += characterID + "|";
@@ -40,8 +33,11 @@ namespace MultiCOloredModernUI.Classes
             return characterInfo;
         }
 
+
+        //Check if the character has the search row in his title and others
         public bool HasIn(string srch, string column)
-        {
+        {   
+            //11111|AbobaName|AbobaDescription|Age|gender|comicID
             string element = "";
             if (column == "name") element = name;
             if (column == "description") element = description.ToString();
@@ -52,8 +48,5 @@ namespace MultiCOloredModernUI.Classes
             return element.ToLower().Contains(srch.ToLower());
 
         }
-
-        //11111|AbobaName|AbobaDescription|Age|gender|comicID
-
     }
 }

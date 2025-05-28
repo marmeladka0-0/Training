@@ -8,19 +8,20 @@ namespace MultiCOloredModernUI.Classes
 {
     public class Comic
     {
+        //Parametrs of comic
         public int comicID { get; set; }
         public string title { get; set; }
         public string author { get; set; }
         public int releaseYear { get; set; }
-        public string type { get; set; }
+        public string type { get; set; } 
         public string genre { get; set; }
         public string status { get; set; }
         public Image? comicCover { get; set; }
         public string? coverPath { get; set; }
 
-        //public Character[]? characters { get; set; }
 
-        public string ToString()
+        //Return comic as a string
+        public string ComicToString()
         {
             string comicInfo = "";
             comicInfo += comicID + "|";
@@ -40,33 +41,11 @@ namespace MultiCOloredModernUI.Classes
             return comicInfo;
         }
 
-        //public bool HasInTitle(string srch)
-        //{
-        //    int j = 0;
-        //    if (srch == "") return true;
-        //    for (int i = 0; i < title.Length; i++)
-        //    {
-        //        char a = char.ToLower(title[i]);
-        //        char b = char.ToLower(srch[j]);
-        //        if (a != b)
-        //        {
-        //            j = 0;
-        //            continue;
-        //        }
-        //        if (a == b)
-        //        {
-        //            j++;
-        //        }
-        //        if (j+1 == srch.Length)
-        //        {
-        //            return true;
-        //        }
-        //    }
-        //    return false;
-        //}
-
+        
+        //Check if the comic has the search row in his title and others
         public bool HasIn(string srch, string column)
         {
+            //11111|AbobaTitle|AbobaAuthor|2023|manhva|fantasy|InProgress|-
             string element = "";
             if (column == "title") element = title;
             if (column == "author") element = author;
@@ -76,33 +55,6 @@ namespace MultiCOloredModernUI.Classes
             if (column == "status") element = status;
 
             return element.ToLower().Contains(srch.ToLower());
-
-
-            //int j = 0;
-
-            //if (srch == "") return true;
-            //for (int i = 0; i < element.Length; i++)
-            //{
-            //    char a = char.ToLower(element[i]);
-            //    char b = char.ToLower(srch[j]);
-            //    if (a != b)
-            //    {
-            //        j = 0;
-            //        continue;
-            //    }
-            //    if (a == b)
-            //    {
-            //        j++;
-            //    }
-            //    if (j + 1 == srch.Length)
-            //    {
-            //        return true;
-            //    }
-            //}
-
-
-            //return false;
         }
-        //11111|AbobaTitle|AbobaAuthor|2023|manhva|fantasy|InProgress|-
     }
 }

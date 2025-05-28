@@ -15,6 +15,8 @@ namespace MultiCOloredModernUI.Forms
 {
     public partial class FormComicInfo : Form
     {
+
+        //Constructor of the info form
         public FormComicInfo(Comic comic, List<Character> characters)
         {
             InitializeComponent();
@@ -28,7 +30,6 @@ namespace MultiCOloredModernUI.Forms
 
             if (comic.comicCover != null)
             {
-                //pictureBoxCover.Dock = DockStyle.Fill;
                 pictureBoxCover.SizeMode = PictureBoxSizeMode.Zoom;
                 pictureBoxCover.Image = comic.comicCover;
             }
@@ -42,14 +43,15 @@ namespace MultiCOloredModernUI.Forms
                     selectedCharacters.Add(character);
                 }
             }
-            //dataGridViewCharacters = new DataGridView();
             dataGridViewCharacters.DataSource = null;
             dataGridViewCharacters.DataSource = selectedCharacters;
             dataGridViewCharacters.Columns["characterId"].Visible = false;
             dataGridViewCharacters.Columns["comicId"].Visible = false;
-            dataGridViewCharacters.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewCharacters.AutoSizeColumnsMode =
+                DataGridViewAutoSizeColumnsMode.Fill;
         }
 
+        //To close window
         private void button1_Click(object sender, EventArgs e)
         {
             this.Close();

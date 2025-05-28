@@ -14,14 +14,27 @@ namespace MultiCOloredModernUI.Classes
 {
     public class Library
     {
+        //List of all comics
         public List<Comic> comics = new List<Comic>();
+
+        //List of comics after search
         public List<Comic> selectedComics = new List<Comic>();
+
+        //List of all characters
         public List<Character> characters = new List<Character>();
+
+        //List of characters after search
         public List<Character> selectedCharacters = new List<Character>();
+
+        //To choose what view it will be, and change if necessary
         public bool isComicSelected = true;
+
+        //To select comic in characters filter
         public Comic? selectedC = null;
 
 
+
+        //To add test data
         public void FillWithTestData()
         {
             comics.Clear();
@@ -133,18 +146,18 @@ namespace MultiCOloredModernUI.Classes
             }
         }
 
+
+        //To read info from txt file
         public void ReadInfo()
         {
             comics.Clear();
             characters.Clear();
             var reader = new StreamReader("Input_Data/LibraryInfo.txt");
-            //D:\\Masha\\CPP\\Training\\Training\\Input_Data\\LibraryInfo.txt
             string? line;
-            while ((line = reader.ReadLine()) != "***")
+            while (((line = reader.ReadLine()) != "***") &&
+                    (line != null))
             {
                 //11111|AbobaTitle|AbobaAuthor|2023|manhva|fantasy|InProgress|-
-                //Console.WriteLine(line);
-                //label3.Text = line;
                 string[] addinfo = line.Split('|');
                 Comic newComic = new Comic();
                 newComic.comicID = Convert.ToInt32(addinfo[0]);
@@ -163,9 +176,6 @@ namespace MultiCOloredModernUI.Classes
             }
             while ((line = reader.ReadLine()) != null)
             {
-                //11111|AbobaTitle|AbobaAuthor|2023|manhva|fantasy|InProgress|-
-                //Console.WriteLine(line);
-                //label3.Text = line;
                 string[] addinfo = line.Split('|');
                 Character newCharacter = new Character();
                 newCharacter.characterID = Convert.ToInt32(addinfo[0]);
@@ -180,6 +190,8 @@ namespace MultiCOloredModernUI.Classes
             reader.Close();
         }
 
+
+        //To save data in a file
         public void WriteNewInfo()
         {
             var writer = new StreamWriter("Input_Data/LibraryInfo.txt");
@@ -187,15 +199,7 @@ namespace MultiCOloredModernUI.Classes
             foreach (Comic newcomic in comics)
             {
                 string line = "";
-                //line += newcomic.comicID + "|";
-                //line += newcomic.title + "|";
-                //line += newcomic.author + "|";
-                //line += newcomic.releaseYear + "|";
-                //line += newcomic.type + "|";
-                //line += newcomic.genre + "|";
-                //line += newcomic.status + "|";
-                //line += "-";
-                line = newcomic.ToString();
+                line = newcomic.ComicToString();
                 writer.WriteLine(line);
             }
 
@@ -204,12 +208,14 @@ namespace MultiCOloredModernUI.Classes
             foreach (Character newCharacter in characters)
             {
                 string line;
-                line = newCharacter.ToString();
+                line = newCharacter.CharacterToString();
                 writer.WriteLine(line);
             }
             writer.Close();
         }
 
+
+        //To search comics by search row
         public List<Comic> SearchComics(string str, string column)
         {
             selectedComics = new List<Comic>();
@@ -225,6 +231,8 @@ namespace MultiCOloredModernUI.Classes
             return selectedComics;
         }
 
+
+        //To search characters by search row
         public List<Character> SearchCharacters(string str, string column)
         {
             selectedCharacters = new List<Character>(); ;
@@ -236,7 +244,6 @@ namespace MultiCOloredModernUI.Classes
                     selectedCharacters.Add(character);
                 }
             }
-
 
             return selectedCharacters;
         }
