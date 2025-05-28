@@ -22,7 +22,8 @@ namespace Training
 
             comboBoxSearchBy.SelectedIndex = 0;
 
-            dataGridView1.DataSource = library.comics;
+            List<Comic> test = new List<Comic>();
+            dataGridView1.DataSource = test;
             dataGridView1.Columns["comicId"].Visible = false;
             dataGridView1.Columns["comicCover"].Visible = false;
             dataGridView1.Columns["coverPath"].Visible = false;
@@ -41,6 +42,13 @@ namespace Training
             panel5.Visible = false;
             label7.Text = "";
             label8.Text = "";
+
+            var reader = new StreamReader("Input_Data/TestData.txt");
+            string? line;
+
+            if ((line = reader.ReadLine()) != null) 
+                dataGridView1.DataSource = library.comics;
+            reader.Close();
         }
 
 

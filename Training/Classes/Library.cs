@@ -39,8 +39,6 @@ namespace MultiCOloredModernUI.Classes
         {
             comics.Clear();
             characters.Clear();
-            comics.Clear();
-            characters.Clear();
             var reader = new StreamReader("Input_Data/TestData.txt");
             string? line;
 

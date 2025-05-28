@@ -10,12 +10,12 @@ namespace MultiCOloredModernUI.Classes
     {
         //Parametrs of comic
         public int comicID { get; set; }
-        public string title { get; set; }
-        public string author { get; set; }
+        public string title { get; set; } = "";
+        public string author { get; set; } = "";
         public int releaseYear { get; set; }
-        public string type { get; set; } 
-        public string genre { get; set; }
-        public string status { get; set; }
+        public string type { get; set; } = "";
+        public string genre { get; set; } = "";
+        public string status { get; set; } = "";
         public Image? comicCover { get; set; }
         public string? coverPath { get; set; }
 
