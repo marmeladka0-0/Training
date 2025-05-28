@@ -22,8 +22,7 @@ namespace Training
 
             comboBoxSearchBy.SelectedIndex = 0;
 
-            List<Comic> test = new List<Comic>();
-            dataGridView1.DataSource = test;
+            dataGridView1.DataSource = library.comics;
             dataGridView1.Columns["comicId"].Visible = false;
             dataGridView1.Columns["comicCover"].Visible = false;
             dataGridView1.Columns["coverPath"].Visible = false;
@@ -42,13 +41,6 @@ namespace Training
             panel5.Visible = false;
             label7.Text = "";
             label8.Text = "";
-
-            //var reader = new StreamReader("Input_Data/TestData.txt");
-            //string? line;
-
-            //if ((line = reader.ReadLine()) != null) 
-            //    dataGridView1.DataSource = library.comics;
-            //reader.Close();
         }
 
 
@@ -242,6 +234,8 @@ namespace Training
         //ADD
         private void buttonAddComic_Click(object sender, EventArgs e)
         {
+
+
             if (library.isComicSelected)
             {
                 FormAddComic form = new FormAddComic();
@@ -250,6 +244,7 @@ namespace Training
                 if (form.NewComic == null) return;
                 if (library.comics.Count == 0) 
                 {
+                    library = new Library();
                     form.NewComic.comicID = 10000;
                 }
                 else
@@ -481,6 +476,7 @@ namespace Training
         //TEST_DATA
         private void importTestDataToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            library = new Library();
             library.FillWithTestData();
             dataGridView1.DataSource = null;
             ChangeFields();

@@ -88,6 +88,12 @@ namespace MultiCOloredModernUI.Classes
         {
             comics.Clear();
             characters.Clear();
+            var readertest = new StreamReader("Input_Data/LibraryInfo.txt");
+            string linetest = readertest.ReadLine();
+            readertest.Close();
+
+            if (linetest == "***") return;
+
             var reader = new StreamReader("Input_Data/LibraryInfo.txt");
             string? line;
             while (((line = reader.ReadLine()) != "***") &&
