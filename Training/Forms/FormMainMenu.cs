@@ -43,12 +43,12 @@ namespace Training
             label7.Text = "";
             label8.Text = "";
 
-            var reader = new StreamReader("Input_Data/TestData.txt");
-            string? line;
+            //var reader = new StreamReader("Input_Data/TestData.txt");
+            //string? line;
 
-            if ((line = reader.ReadLine()) != null) 
-                dataGridView1.DataSource = library.comics;
-            reader.Close();
+            //if ((line = reader.ReadLine()) != null) 
+            //    dataGridView1.DataSource = library.comics;
+            //reader.Close();
         }
 
 
